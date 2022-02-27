@@ -165,8 +165,8 @@ void Peach::getBonked(bool a){
     if(a){
         return;
     }
-    
-    setHP(getHP() - 1);
+    int temp = getHP() - 1;
+    setHP(temp);
     m_invicibleTime = 10;
     m_hasShoot = false;
     m_hasJump = false;
@@ -333,8 +333,15 @@ void Peach::doSomethingAux()
                     }
                     break;
                 }
-            case KEY_PRESS_SPACE:
+                case KEY_PRESS_SPACE:
+                {
+                    if(hasShootPower())
+                    {
+                        PeachFireball* pf = new PeachFireball(world(), getX(), getY(), getDirection());
+                        world()->addActor(pf);
+                    }
                 break;
+                }
             }
         }
     return;
@@ -370,12 +377,27 @@ Goodie::Goodie(StudentWorld* w, int imageID, int x, int y)
 void Goodie::doSomethingAux()
 {
     if(world()->overlapsPeach(this)){
-        world()->getPeach()->gainJumpPower();
+        gainPower();
         setDead();
     }else{
         Gmove();
     }
     return;
+}
+
+void Flower::gainPower()
+{
+    world()->getPeach()->gainShootPower();
+}
+
+void Mushroom::gainPower()
+{
+    world()->getPeach()->gainJumpPower();
+}
+
+void Star::gainPower()
+{
+    world()->getPeach()->gainInvincibility(10);
 }
 
 
@@ -400,6 +422,11 @@ PeachFireball::PeachFireball(StudentWorld* w, int x, int y, int dir)
 :Projectile(w, IID_PEACH_FIRE, x, y, dir)
 {
     
+}
+
+void PeachFireball::doSomethingAux()
+{
+    return;
 }
 
 Shell::Shell(StudentWorld* w, int x, int y, int dir)

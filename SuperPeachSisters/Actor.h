@@ -145,24 +145,28 @@ public:
     Goodie(StudentWorld* w, int imageID, int x, int y);
     void Gmove();
     void doSomethingAux();
+    virtual void gainPower() = 0;
 };
 
 class Flower : public Goodie
 {
 public:
     Flower(StudentWorld* w, int x, int y);
+    void gainPower() override;
 };
 
 class Mushroom : public Goodie
 {
 public:
     Mushroom(StudentWorld* w, int x, int y);
+    void gainPower() override;
 };
 
 class Star : public Goodie
 {
 public:
     Star(StudentWorld* w, int x, int y);
+    void gainPower() override;
 };
 
 class Projectile : public Actor
@@ -181,6 +185,7 @@ public:
 class PeachFireball : public Projectile
 {
 public:
+    void doSomethingAux();
     PeachFireball(StudentWorld* w, int x, int y, int dir);
 };
 
