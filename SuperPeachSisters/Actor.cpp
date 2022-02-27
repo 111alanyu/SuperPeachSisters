@@ -70,7 +70,7 @@ void Peach::gainShootPower()
 void Peach::gainInvincibility(int ticks)
 {
     m_invincible = true;
-    m_invicibleTime = true;
+    m_invicibleTime = ticks;
 }
 
 Star::Star(StudentWorld* w, int x, int y)
@@ -131,6 +131,7 @@ Peach::Peach(StudentWorld *w, int x, int y)
     m_jumpDist = 0;
     m_hasJump = false;
     m_invincible = false;
+    m_hp = 1;
 }
 
 Mushroom::Mushroom(StudentWorld* w, int x, int y)
@@ -158,6 +159,10 @@ int Peach::getHP() const
 void Peach::setHP(int hp)
 {
     m_hp = hp;
+    if(m_hp == 0){
+        setDead();
+    }
+    return;
 }
 
 void Peach::getBonked(bool a){
@@ -290,7 +295,12 @@ void Peach::doSomethingAux()
         return;
     }
     
-    
+    if(m_invicibleTime != 0)
+    {
+        m_invicibleTime--;
+    }else if(m_invicibleTime == 0){
+        m_invincible = false;
+    }
     
     if(m_jumpDist > 0){
         if(world() -> moveOrBonk(this, getX(), getY() + 4)){
@@ -395,7 +405,7 @@ void Mushroom::gainPower()
 
 void Star::gainPower()
 {
-    world()->getPeach()->gainInvincibility(10);
+    world()->getPeach()->gainInvincibility(150);
 }
 
 
@@ -431,7 +441,7 @@ void PeachFireball::doSomethingAux()
         return;
     }
     
-    world()->isMovePossible(this, getX(), getY() - 2);
+    world()->moveIfPossible(this, getX(), getY() - 2);
     cerr<<"GD: "<<getDirection()<<endl;
     if(getDirection() == 0){
         cerr<<"Z Called"<<endl;

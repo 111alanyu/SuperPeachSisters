@@ -237,6 +237,10 @@ int StudentWorld::move()
     // Notice that the return value GWSTATUS_PLAYER_DIED will cause our framework to end the current level.
     displayText();
     
+    if(m_peach -> isDead())
+    {
+        return GWSTATUS_PLAYER_DIED;
+    }
     for(int i = 0; i < m_Actors.size(); i++){
         if(!m_Actors[i]->isDead()){
             m_Actors[i]->doSomething();
@@ -247,6 +251,7 @@ int StudentWorld::move()
         
     }
     m_peach -> doSomething();
+
     return GWSTATUS_CONTINUE_GAME;
 }
 
