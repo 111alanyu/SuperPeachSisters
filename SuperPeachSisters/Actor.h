@@ -95,6 +95,7 @@ private:
     bool m_hasJump;
     bool m_hasShoot;
     bool m_invincible;
+    int m_invicibleTime;
 };
 
 // (Further private sections won't be shown.)
@@ -138,6 +139,7 @@ class Goodie : public Actor
 {
 public:
     Goodie(StudentWorld* w, int imageID, int x, int y);
+    void Gmove();
 };
 
 class Flower : public Goodie

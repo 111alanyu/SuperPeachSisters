@@ -94,6 +94,8 @@ public:
     
     void findBonkable(Actor* a, int destx, int desty) const;
     
+    void displayText();
+    
     
 private:
     std::vector <Actor*> m_Actors;

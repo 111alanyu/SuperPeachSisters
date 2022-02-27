@@ -3,6 +3,7 @@
 #include "Level.h"
 #include "Actor.h"
 #include <string>
+#include <sstream>
 using namespace std;
 
 
@@ -223,13 +224,47 @@ bool StudentWorld::overlapsPeach(Actor *a) const
     return false;
 }
 
+void StudentWorld::displayText()
+{
+    ostringstream a;
+    string star = "";
+    string jump = "";
+    string fire = "";
+    
+    if(m_peach->hasJumpPower())
+    {
+        jump = " JumpPower!";
+    }
+    
+    if(m_peach->hasShootPower()){
+        fire = " ShootPower!";
+    }
+    
+    if(m_peach->isInvincible()){
+        star = " StarPower!";
+    }
+    
+    a.fill('0');
+    a << "Lives: " <<getLives()<< " Level: " << setw(2) << getLevel() << " Points: " << setw(6) << getScore() << star << fire << jump;
+    
+    string game = a.str();
+    setGameStatText(game);
+}
+
 int StudentWorld::move()
 {
     // This code is here merely to allow the game to build, run, and terminate after you hit enter.
     // Notice that the return value GWSTATUS_PLAYER_DIED will cause our framework to end the current level.
-    decLives();
+    displayText();
+    
     for(int i = 0; i < m_Actors.size(); i++){
-        m_Actors[i]->doSomething();
+        if(!m_Actors[i]->isDead()){
+            m_Actors[i]->doSomething();
+        }else{
+            delete m_Actors[i];
+            m_Actors.erase(m_Actors.begin()+i);
+        }
+        
     }
     m_peach -> doSomething();
     return GWSTATUS_CONTINUE_GAME;

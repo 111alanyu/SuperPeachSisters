@@ -5,6 +5,10 @@
 
 using namespace std;
 
+bool Actor::isDead() const
+{
+    return m_dead;
+}
 bool Actor::blocksMovement() const
 {
     return false;
@@ -18,34 +22,86 @@ void Block::getBonked(bool bonkerIsInvinciblePeach)
         {
             Flower* flow = new Flower(world(), getX(), getY() +SPRITE_HEIGHT);
             world()->addActor(flow);
+            m_g = none;
         }
         if(m_g == star)
         {
             Star* star = new Star(world(), getX(), getY() + SPRITE_HEIGHT);
             world()->addActor(star);
+            m_g = none;
         }
         if(m_g == mushroom)
         {
             Mushroom* mushy = new Mushroom(world(), getX(), getY() + SPRITE_HEIGHT);
             world()->addActor(mushy);
+            m_g = none;
         }
     }
     return;
 }
 
+void Actor::setDead()
+{
+    m_dead = true;
+}
+
+void Goodie::Gmove()
+{
+    world() -> moveIfPossible(this, getX(), getY() - 2);
+    if(getDirection() == 0){
+        if(!world() -> moveIfPossible(this, getX() + 2, getY())){
+            setDirection(180);
+        }
+    }else if(getDirection() == 180)
+    {
+        if(!world() -> moveIfPossible(this, getX() - 2, getY())){
+            setDirection(0);
+        }
+    }
+}
+
 void Mushroom::doSomethingAux()
 {
+    if(world()->overlapsPeach(this)){
+        world()->getPeach()->gainJumpPower();
+        setDead();
+    }else{
+        Gmove();
+    }
     return;
 }
 
 void Flower::doSomethingAux()
 {
+    if(world()->overlapsPeach(this)){
+        world()->getPeach()->gainShootPower();
+        setDead();
+    }else{
+        Gmove();
+    }
     return;
 }
 
 void Star::doSomethingAux()
 {
+    if(world()->overlapsPeach(this)){
+        world()->getPeach()->gainInvincibility(10);
+        setDead();
+    }else{
+        Gmove();
+    }
     return;
+}
+
+void Peach::gainShootPower()
+{
+    m_hasShoot = true;
+}
+
+void Peach::gainInvincibility(int ticks)
+{
+    m_invincible = true;
+    m_invicibleTime = true;
 }
 
 Star::Star(StudentWorld* w, int x, int y)
@@ -54,9 +110,6 @@ Star::Star(StudentWorld* w, int x, int y)
     
 }
 
-bool Actor::isDead() const{
-    return m_dead;
-}
 
 
 void LevelEnder::doSomething()
@@ -68,6 +121,7 @@ Actor::Actor(StudentWorld* w, int ID, int x, int y, int dir, int depth)
 :GraphObject(ID, x, y)
 {
     m_world = w;
+    m_dead = false;
 }
 
 LevelEnder::LevelEnder(StudentWorld* w, int x, int y, bool isGameEnder)
@@ -192,7 +246,7 @@ void Peach::doSomethingAux()
                     if(!world()->isMovePossible(this, getX(), getY()-1))
                     {
                         
-                        if(hasShootPower())
+                        if(hasJumpPower())
                         {
                             m_jumpDist = 12;
                         }else{
