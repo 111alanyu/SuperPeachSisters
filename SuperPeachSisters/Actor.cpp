@@ -131,7 +131,7 @@ void Peach::doSomethingAux()
                     
             case KEY_PRESS_UP:
                 {
-                    if(world()->isMovePossible(this, getX(), getY()-1))
+                    if(!world()->isMovePossible(this, getX(), getY()-1))
                     {
                         if(hasShootPower())
                         {

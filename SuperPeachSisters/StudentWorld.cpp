@@ -29,16 +29,27 @@ int StudentWorld::init()
 bool StudentWorld::moveOrBonk(Actor *a, int destx, int desty) const
 {
     if(moveIfPossible(a, destx, desty)){
-        cerr<<"Treu"<<endl;
-        a->moveTo(destx, desty);
         return true;
+    }else{
+        //TODO: PUT BONK CODE
+        return false;
     }
-    return false;
+    
 }
 
 bool StudentWorld::moveIfPossible(Actor *a, int destx, int desty) const
 {
-    
+    if(isMovePossible(a, destx, desty)){
+        a->moveTo(destx, desty);
+        return true;
+    }else{
+        return false;
+    }
+}
+
+
+bool StudentWorld::isMovePossible(Actor *a, int destx, int desty) const
+{
     
     for(int i = 0; i < m_Actors.size(); i++)
     {
@@ -80,13 +91,8 @@ bool StudentWorld::moveIfPossible(Actor *a, int destx, int desty) const
             }
         }
     }
+    
     return true;
-}
-
-
-bool StudentWorld::isMovePossible(Actor *a, int destx, int desty) const
-{
-    return true; //TODO: CHANGE THIS
 }
 
 int StudentWorld::move()
