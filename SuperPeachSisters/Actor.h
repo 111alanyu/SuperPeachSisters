@@ -67,6 +67,8 @@ public:
     virtual void getBonked(bool bonkerIsInvinciblePeach);
     virtual void sufferDamageIfDamageable();
     
+    bool blocksMovement() const;
+    
       // Set Peach's hit points.
     void setHP(int hp);
     
@@ -87,7 +89,9 @@ public:
 
       // Does Peach have Jump Power?
     bool hasJumpPower() const;
-
+    
+    int getHP() const;
+    
     
 private:
     virtual void doSomethingAux();
@@ -96,6 +100,7 @@ private:
     bool m_hasShoot;
     bool m_invincible;
     int m_invicibleTime;
+    int m_hp;
 };
 
 // (Further private sections won't be shown.)
@@ -212,6 +217,7 @@ class Piranha : public Enemy
 {
 public:
     Piranha(StudentWorld* w, int x, int y);
+    void doSomethingAux();
 };
 
 #endif // ACTOR_INCLUDED

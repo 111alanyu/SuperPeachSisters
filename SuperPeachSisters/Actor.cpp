@@ -102,7 +102,8 @@ LevelEnder::LevelEnder(StudentWorld* w, int x, int y, bool isGameEnder)
 }
 
 Pipe::Pipe(StudentWorld* w, int x, int y)
-:Obstacle(w, IID_PIPE, x, y){
+:Obstacle(w, IID_PIPE, x, y)
+{
     
 }
 
@@ -149,7 +150,33 @@ void Actor::sufferDamageIfDamageable()
     return;
 }
 
+int Peach::getHP() const
+{
+    return m_hp;
+}
+
+void Peach::setHP(int hp)
+{
+    m_hp = hp;
+}
+
 void Peach::getBonked(bool a){
+    
+    if(a){
+        return;
+    }
+    
+    setHP(getHP() - 1);
+    m_invicibleTime = 10;
+    m_hasShoot = false;
+    m_hasJump = false;
+    world()->playSound(SOUND_PLAYER_HURT);
+    
+    if(getHP() == 0)
+    {
+        setDead();
+    }
+    
     return;
 }
 
@@ -179,8 +206,37 @@ void Block::doSomethingAux()
     return;
 }
 
+bool Peach::blocksMovement() const
+{
+    return false;
+}
+
+
 void Enemy::doSomethingAux()
 {
+    if(isDead())
+    {
+        return;
+    }
+    
+    if(world()->overlapsPeach(this))
+    {
+        world()->getPeach()->getBonked(world()->getPeach()->isInvincible());
+        return;
+    }
+    
+    
+    if(getDirection() == 0){
+        if(!world()->moveIfPossible(this, getX() + 1, getY()))
+        {
+            setDirection(180);
+        }
+    }else{
+        if(!world()->moveIfPossible(this, getX() - 1, getY())){
+            setDirection(0);
+        }
+    }
+    
     return;
 }
 
@@ -311,3 +367,8 @@ void Goodie::doSomethingAux()
     return;
 }
 
+
+void Piranha::doSomethingAux()
+{
+    return;
+}
