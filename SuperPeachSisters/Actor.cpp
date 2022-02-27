@@ -144,11 +144,11 @@ bool Obstacle::blocksMovement() const
     return true;//TODO: Check
 }
 
-
-void Actor::sufferDamageIfDamageable()
+void Peach::sufferDamageIfDamageable()
 {
     return;
 }
+
 
 int Peach::getHP() const
 {
@@ -181,10 +181,6 @@ void Peach::getBonked(bool a){
 }
 
 
-void Peach::sufferDamageIfDamageable()
-{
-    return;
-}
 
 bool Peach::hasJumpPower() const
 {
@@ -264,6 +260,8 @@ void Enemy::getBonked(bool bonkerIsInvinciblePeach)
 
 void Enemy::sufferDamageIfDamageable()
 {
+    world()->increaseScore(100);
+    this->setDead();
     return;
 }
 
@@ -426,6 +424,7 @@ PeachFireball::PeachFireball(StudentWorld* w, int x, int y, int dir)
 
 void PeachFireball::doSomethingAux()
 {
+    world()->damageOverlappingActor(this);
     return;
 }
 
@@ -433,4 +432,9 @@ Shell::Shell(StudentWorld* w, int x, int y, int dir)
 :Projectile(w, IID_SHELL, x, y, dir)
 {
     
+}
+
+void Actor::sufferDamageIfDamageable()
+{
+    return;
 }

@@ -59,7 +59,7 @@ public:
 
       // If a non-Peach actor overlaps bonker, bonk that non-Peach actor and
       // return true; otherwise, return false.  (The bonker will be Peach.)
-    bool bonkOverlappingActor(Actor* bonker) const;
+    bool bonkOverlappingActor(Actor* bonker) const; //DONE
 
       // If Peach overlaps damager, damage her and return true; otherwise,
       // return false.

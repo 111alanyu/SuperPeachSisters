@@ -93,6 +93,7 @@ public:
     int getHP() const;
     
     
+    
 private:
     virtual void doSomethingAux();
     int m_jumpDist;
@@ -109,7 +110,7 @@ class Obstacle : public Actor
 {
 public:
     Obstacle(StudentWorld* w, int imageID, int x, int y);
-    virtual bool blocksMovement() const;
+    bool blocksMovement() const;
 };
 
 class Block : public Obstacle
@@ -118,7 +119,7 @@ public:
     enum GoodieType { none, flower, mushroom, star };
     void doSomethingAux();
     Block(StudentWorld* w, int x, int y, GoodieType g = none);
-    virtual void getBonked(bool bonkerIsInvinciblePeach);
+    void getBonked(bool bonkerIsInvinciblePeach);
 private:
     GoodieType m_g;
 };

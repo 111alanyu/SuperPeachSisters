@@ -62,26 +62,6 @@ void StudentWorld::findBonkable(Actor* a, int destx, int desty) const
         int x2_Extend = x2 + SPRITE_WIDTH - 1;
         int y2_Extend = y2 + SPRITE_HEIGHT - 1;
         
-        /* DEBUG TOOLS*/
-        /*
-        cerr<<x1<<endl;
-        cerr<<y1<<endl;
-        cerr<<x1_Extend<<endl;
-        cerr<<y1_Extend<<endl;
-        
-        cerr<<endl;
-        
-        cerr<<x2<<endl;
-        cerr<<y2<<endl;
-        cerr<<x2_Extend<<endl;
-        cerr<<y2_Extend<<endl;
-        
-        cerr<<endl;
-        cerr<<"------------------------"<<endl;
-        cerr<<endl;
-        
-         */
-        
         if((x2 <= x1 && x1 <= x2_Extend) || (x2 <= x1_Extend && x1_Extend <= x2_Extend)){
             if((y2 <= y1 && y1 <= y2_Extend) || (y2 <= y1_Extend && y1_Extend <= y2_Extend)){
                 m_Actors[i]->getBonked(getPeach()->isInvincible());
@@ -280,6 +260,36 @@ void StudentWorld::cleanUp()
     delete m_peach;
 }
 
+
+
+
+bool StudentWorld::damageOverlappingActor(Actor *damager)const
+{
+    for(int i = 0; i < m_Actors.size(); i++)
+    {
+        int x1 = damager->getX();
+        int y1 = damager->getY();
+
+        int x2 = m_Actors[i]->getX();
+        int y2 = m_Actors[i]->getY();
+
+        int x1_Extend = x1 + SPRITE_WIDTH - 1;
+        int y1_Extend = y1 + SPRITE_HEIGHT -1;
+
+        int x2_Extend = x2 + SPRITE_WIDTH - 1;
+        int y2_Extend = y2 + SPRITE_HEIGHT - 1;
+        
+        if((x2 <= x1 && x1 <= x2_Extend) || (x2 <= x1_Extend && x1_Extend <= x2_Extend)){
+            if((y2 <= y1 && y1 <= y2_Extend) || (y2 <= y1_Extend && y1_Extend <= y2_Extend)){
+                m_Actors[i]->sufferDamageIfDamageable();
+                return true;
+            }
+        }
+
+    }
+    
+    return false;
+}
 
 
 StudentWorld::~StudentWorld()
