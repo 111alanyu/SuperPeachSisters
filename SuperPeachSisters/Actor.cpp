@@ -60,38 +60,7 @@ void Goodie::Gmove()
     }
 }
 
-void Mushroom::doSomethingAux()
-{
-    if(world()->overlapsPeach(this)){
-        world()->getPeach()->gainJumpPower();
-        setDead();
-    }else{
-        Gmove();
-    }
-    return;
-}
 
-void Flower::doSomethingAux()
-{
-    if(world()->overlapsPeach(this)){
-        world()->getPeach()->gainShootPower();
-        setDead();
-    }else{
-        Gmove();
-    }
-    return;
-}
-
-void Star::doSomethingAux()
-{
-    if(world()->overlapsPeach(this)){
-        world()->getPeach()->gainInvincibility(10);
-        setDead();
-    }else{
-        Gmove();
-    }
-    return;
-}
 
 void Peach::gainShootPower()
 {
@@ -116,6 +85,8 @@ void LevelEnder::doSomething()
 {
     return;
 }
+
+
 
 Actor::Actor(StudentWorld* w, int ID, int x, int y, int dir, int depth)
 :GraphObject(ID, x, y)
@@ -164,7 +135,6 @@ Peach::Peach(StudentWorld *w, int x, int y)
 Mushroom::Mushroom(StudentWorld* w, int x, int y)
 :Goodie(w, IID_MUSHROOM, x, y)
 {
-    cerr<<"MUSHROOM CONSTRUCTOR CALLED"<<endl;
 }
 
 
@@ -208,6 +178,46 @@ void Block::doSomethingAux()
 {
     return;
 }
+
+void Enemy::doSomethingAux()
+{
+    return;
+}
+
+Enemy::Enemy(StudentWorld* w, int imageID, int x, int y)
+:Actor(w, imageID, x, y)
+{
+    
+}
+
+void Enemy::getBonked(bool bonkerIsInvinciblePeach)
+{
+    return;
+}
+
+void Enemy::sufferDamageIfDamageable()
+{
+    return;
+}
+
+Goomba::Goomba(StudentWorld* w, int x, int y)
+:Enemy(w, IID_GOOMBA, x, y)
+{
+    
+}
+
+Koopa::Koopa(StudentWorld* w, int x, int y)
+:Enemy(w, IID_KOOPA, x, y)
+{
+    
+}
+
+Piranha::Piranha(StudentWorld* w, int x, int y)
+:Enemy(w, IID_PIRANHA, x, y)
+{
+    
+}
+
 
 void Peach::doSomethingAux()
 {
@@ -289,3 +299,15 @@ Goodie::Goodie(StudentWorld* w, int imageID, int x, int y)
 {
     
 }
+
+void Goodie::doSomethingAux()
+{
+    if(world()->overlapsPeach(this)){
+        world()->getPeach()->gainJumpPower();
+        setDead();
+    }else{
+        Gmove();
+    }
+    return;
+}
+

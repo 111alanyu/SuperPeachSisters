@@ -140,26 +140,24 @@ class Goodie : public Actor
 public:
     Goodie(StudentWorld* w, int imageID, int x, int y);
     void Gmove();
+    void doSomethingAux();
 };
 
 class Flower : public Goodie
 {
 public:
-    void doSomethingAux();
     Flower(StudentWorld* w, int x, int y);
 };
 
 class Mushroom : public Goodie
 {
 public:
-    void doSomethingAux();
     Mushroom(StudentWorld* w, int x, int y);
 };
 
 class Star : public Goodie
 {
 public:
-    void doSomethingAux();
     Star(StudentWorld* w, int x, int y);
 };
 
@@ -194,6 +192,7 @@ public:
     Enemy(StudentWorld* w, int imageID, int x, int y);
     virtual void getBonked(bool bonkerIsInvinciblePeach);
     virtual void sufferDamageIfDamageable();
+    void doSomethingAux();
 };
 
 class Goomba : public Enemy
@@ -205,6 +204,7 @@ public:
 class Koopa : public Enemy
 {
 public:
+    
     Koopa(StudentWorld* w, int x, int y);
 };
 

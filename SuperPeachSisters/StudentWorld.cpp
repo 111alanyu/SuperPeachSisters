@@ -245,7 +245,7 @@ void StudentWorld::displayText()
     }
     
     a.fill('0');
-    a << "Lives: " <<getLives()<< " Level: " << setw(2) << getLevel() << " Points: " << setw(6) << getScore() << star << fire << jump;
+    a << "Lives: " <<getLives()<< "  Level: " << setw(2) << getLevel() << "  Points: " << setw(6) << getScore() << star << fire << jump;
     
     string game = a.str();
     setGameStatText(game);
@@ -315,17 +315,22 @@ void StudentWorld::load()
                         //does nothing
                         break;
                     case Level::mushroom_goodie_block:{
-                        cerr<<"MUSHY CREATED"<<endl;
                         Block* newBlock = new Block(this, i * SPRITE_WIDTH, j * SPRITE_HEIGHT, Block::mushroom);
                         m_Actors.push_back(newBlock);
                         break;
                     }
                     case Level::koopa:
-                        cout << "Location starts with a koopa" << endl;
+                    {
+                        Koopa* newKoopa = new Koopa(this, i * SPRITE_WIDTH, j * SPRITE_HEIGHT);
+                        m_Actors.push_back(newKoopa);
                         break;
+                    }
                     case Level::goomba:
-                        cout << "Location starts with a goomba" << endl;
+                    {
+                        Goomba* newGoomba = new Goomba(this, i * SPRITE_WIDTH, j * SPRITE_HEIGHT);
+                        m_Actors.push_back(newGoomba);
                         break;
+                    }
                     case Level::peach: {
                         Peach* newPeach = new Peach(this, i * SPRITE_WIDTH, j * SPRITE_HEIGHT);
                         m_peach = newPeach;
@@ -357,6 +362,12 @@ void StudentWorld::load()
                     {
                         Block* newBlock = new Block(this, i * SPRITE_WIDTH, j * SPRITE_HEIGHT, Block::flower);
                         m_Actors.push_back(newBlock);
+                        break;
+                    }
+                    case Level::piranha:
+                    {
+                        Piranha* newPiranha = new Piranha(this, i * SPRITE_WIDTH, j * SPRITE_HEIGHT);
+                        m_Actors.push_back(newPiranha);
                         break;
                     }
                     default:
