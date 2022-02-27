@@ -239,6 +239,7 @@ int StudentWorld::move()
     
     if(m_peach -> isDead())
     {
+        playSound(SOUND_PLAYER_DIE);
         return GWSTATUS_PLAYER_DIED;
     }
     for(int i = 0; i < m_Actors.size(); i++){
@@ -260,7 +261,8 @@ void StudentWorld::cleanUp()
     for(int i = 0; i < m_Actors.size(); i++)
     {
         delete m_Actors[i];
-        
+        cerr<<"!"<<i<<endl;
+        m_Actors.erase(m_Actors.begin()+i);
     }
     delete m_peach;
 }

@@ -132,6 +132,7 @@ Peach::Peach(StudentWorld *w, int x, int y)
     m_hasJump = false;
     m_invincible = false;
     m_hp = 1;
+    m_timeToNext = 0;
 }
 
 Mushroom::Mushroom(StudentWorld* w, int x, int y)
@@ -302,6 +303,11 @@ void Peach::doSomethingAux()
         m_invincible = false;
     }
     
+    if(m_timeToNext > 0)
+    {
+        m_timeToNext--;
+    }
+    
     if(m_jumpDist > 0){
         if(world() -> moveOrBonk(this, getX(), getY() + 4)){
             m_jumpDist--;
@@ -343,8 +349,10 @@ void Peach::doSomethingAux()
                 }
                 case KEY_PRESS_SPACE:
                 {
-                    if(hasShootPower())
+                    if(hasShootPower() && m_timeToNext == 0)
                     {
+                        m_timeToNext = 8;
+                        
                         PeachFireball* pf = new PeachFireball(world(), getX(), getY(), getDirection());
                         world()->addActor(pf);
                     }

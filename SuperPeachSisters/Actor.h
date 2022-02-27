@@ -21,8 +21,9 @@ public:
       // Action to perform for each tick.
     void doSomething()
     {
-        if (!m_dead)
+        if (!m_dead){
             doSomethingAux();
+        }
     }
 
       // Bonk this actor.  Parameter says whether bonker is Peach with invincibiity.
@@ -102,6 +103,7 @@ private:
     bool m_invincible;
     int m_invicibleTime;
     int m_hp;
+    int m_timeToNext;
 };
 
 // (Further private sections won't be shown.)
