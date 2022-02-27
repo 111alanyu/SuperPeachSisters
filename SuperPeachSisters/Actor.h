@@ -116,7 +116,6 @@ class Block : public Obstacle
 {
 public:
     enum GoodieType { none, flower, mushroom, star };
-
     void doSomethingAux();
     Block(StudentWorld* w, int x, int y, GoodieType g = none);
     virtual void getBonked(bool bonkerIsInvinciblePeach);
@@ -198,6 +197,7 @@ public:
     virtual void getBonked(bool bonkerIsInvinciblePeach);
     virtual void sufferDamageIfDamageable();
     void doSomethingAux();
+    bool blocksMovement() const;
 };
 
 class Goomba : public Enemy

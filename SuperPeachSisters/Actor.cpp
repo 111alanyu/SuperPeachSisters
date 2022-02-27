@@ -211,6 +211,10 @@ bool Peach::blocksMovement() const
     return false;
 }
 
+bool Enemy::blocksMovement()const
+{
+    return false;
+}
 
 void Enemy::doSomethingAux()
 {
@@ -222,21 +226,28 @@ void Enemy::doSomethingAux()
     if(world()->overlapsPeach(this))
     {
         world()->getPeach()->getBonked(world()->getPeach()->isInvincible());
-        return;
     }
     
-    
     if(getDirection() == 0){
-        if(!world()->moveIfPossible(this, getX() + 1, getY()))
-        {
+        if(!world()->isMovePossible(this, getX()+SPRITE_WIDTH, getY()-1)){
+            
+            if(!world()->moveIfPossible(this, getX()+1, getY())){
+                setDirection(180);
+            }
+                
+        }else{
             setDirection(180);
         }
     }else{
-        if(!world()->moveIfPossible(this, getX() - 1, getY())){
+        if(!world()->isMovePossible(this, getX()-SPRITE_WIDTH, getY()-1)){
+            
+            if(!world()->moveIfPossible(this, getX()-1, getY())){
+                setDirection(0);
+            }
+        }else{
             setDirection(0);
         }
     }
-    
     return;
 }
 
