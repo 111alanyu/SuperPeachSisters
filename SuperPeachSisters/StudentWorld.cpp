@@ -279,13 +279,14 @@ bool StudentWorld::damageOverlappingActor(Actor *damager)const
         int x2_Extend = x2 + SPRITE_WIDTH - 1;
         int y2_Extend = y2 + SPRITE_HEIGHT - 1;
         
-        if((x2 <= x1 && x1 <= x2_Extend) || (x2 <= x1_Extend && x1_Extend <= x2_Extend)){
-            if((y2 <= y1 && y1 <= y2_Extend) || (y2 <= y1_Extend && y1_Extend <= y2_Extend)){
-                m_Actors[i]->sufferDamageIfDamageable();
-                return true;
+            if((x2 <= x1 && x1 <= x2_Extend) || (x2 <= x1_Extend && x1_Extend <= x2_Extend)){
+                if((y2 <= y1 && y1 <= y2_Extend) || (y2 <= y1_Extend && y1_Extend <= y2_Extend)){
+                    if(m_Actors[i]->sufferDamageIfDamageable()){
+                        cerr<<"SDID"<<endl;
+                        return true;
+                    }
+                }
             }
-        }
-
     }
     
     return false;

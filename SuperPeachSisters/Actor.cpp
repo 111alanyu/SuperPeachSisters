@@ -89,7 +89,7 @@ void LevelEnder::doSomething()
 
 
 Actor::Actor(StudentWorld* w, int ID, int x, int y, int dir, int depth)
-:GraphObject(ID, x, y)
+:GraphObject(ID, x, y, dir)
 {
     m_world = w;
     m_dead = false;
@@ -144,9 +144,9 @@ bool Obstacle::blocksMovement() const
     return true;//TODO: Check
 }
 
-void Peach::sufferDamageIfDamageable()
+bool Peach::sufferDamageIfDamageable()
 {
-    return;
+    return true;
 }
 
 
@@ -258,11 +258,11 @@ void Enemy::getBonked(bool bonkerIsInvinciblePeach)
     return;
 }
 
-void Enemy::sufferDamageIfDamageable()
+bool Enemy::sufferDamageIfDamageable()
 {
     world()->increaseScore(100);
     this->setDead();
-    return;
+    return true;
 }
 
 Goomba::Goomba(StudentWorld* w, int x, int y)
@@ -405,7 +405,7 @@ void Piranha::doSomethingAux()
 }
 
 Projectile::Projectile(StudentWorld* w, int imageID, int x, int y, int dir)
-:Actor(w, imageID, x, y)
+:Actor(w, imageID, x, y, dir)
 {
     
 }
@@ -424,7 +424,30 @@ PeachFireball::PeachFireball(StudentWorld* w, int x, int y, int dir)
 
 void PeachFireball::doSomethingAux()
 {
-    world()->damageOverlappingActor(this);
+    if(world()->damageOverlappingActor(this))
+    {
+        cerr<<"RET"<<endl;
+        this->setDead();
+        return;
+    }
+    
+    world()->isMovePossible(this, getX(), getY() - 2);
+    cerr<<"GD: "<<getDirection()<<endl;
+    if(getDirection() == 0){
+        cerr<<"Z Called"<<endl;
+        if(!world() -> moveIfPossible(this, getX() + 2, getY())){
+            setDead();
+            return;
+        }
+    }else if(getDirection() == 180)
+    {
+        cerr<<"O Called"<<endl;
+        if(!world() -> moveIfPossible(this, getX() - 2, getY())){
+            setDead();
+            return;
+        }
+    }
+    
     return;
 }
 
@@ -434,7 +457,7 @@ Shell::Shell(StudentWorld* w, int x, int y, int dir)
     
 }
 
-void Actor::sufferDamageIfDamageable()
+bool Actor::sufferDamageIfDamageable()
 {
-    return;
+    return false;
 }

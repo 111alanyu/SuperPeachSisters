@@ -30,7 +30,7 @@ public:
     {}
 
       // Do what the spec says happens when damage is inflicted on this actor.
-    virtual void sufferDamageIfDamageable();
+    virtual bool sufferDamageIfDamageable();
 
       // Fall the indicated distance if not blocked.
     void fallIfPossible(int dist);
@@ -65,7 +65,7 @@ class Peach : public Actor
 public:
     Peach(StudentWorld* w, int x, int y);
     virtual void getBonked(bool bonkerIsInvinciblePeach);
-    virtual void sufferDamageIfDamageable();
+    virtual bool sufferDamageIfDamageable();
     
     bool blocksMovement() const;
     
@@ -201,7 +201,7 @@ class Enemy : public Actor
 public:
     Enemy(StudentWorld* w, int imageID, int x, int y);
     virtual void getBonked(bool bonkerIsInvinciblePeach);
-    virtual void sufferDamageIfDamageable();
+    virtual bool sufferDamageIfDamageable();
     void doSomethingAux();
     bool blocksMovement() const;
 };
