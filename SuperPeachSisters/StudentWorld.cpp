@@ -258,13 +258,16 @@ int StudentWorld::move()
 
 void StudentWorld::cleanUp()
 {
-    for(int i = 0; i < m_Actors.size(); i++)
+    vector<Actor*>::iterator it;
+    it = m_Actors.begin();
+    for(; it != m_Actors.end(); it++)
     {
-        delete m_Actors[i];
-        cerr<<"!"<<i<<endl;
-        m_Actors.erase(m_Actors.begin()+i);
+        delete *it;
+        it = m_Actors.erase(it);
+        it--;
     }
     delete m_peach;
+    
 }
 
 
