@@ -8,6 +8,10 @@ void Block::getBonked(bool bonkerIsInvinciblePeach)
     return;
 }
 
+bool Actor::isDead() const{
+    return m_dead;
+}
+
 
 void Block::doSomethingAux()
 {
@@ -51,7 +55,8 @@ Block::Block(StudentWorld* w, int x ,int y, GoodieType g)
 Peach::Peach(StudentWorld *w, int x, int y)
 :Actor(w, IID_PEACH, x, y)
 {
-    
+    m_jumpDist = 0;
+    m_hasJump = false;
 }
 
 bool Obstacle::blocksMovement() const
@@ -79,9 +84,39 @@ void Peach::sufferDamageIfDamageable()
     return;
 }
 
+bool Peach::hasJumpPower() const
+{
+    return m_hasJump;
+}
+
+bool Peach::hasShootPower() const
+{
+    return m_hasShoot;
+}
+
+void Peach::gainJumpPower()
+{
+    m_hasJump = true;
+}
+
+
+
 void Peach::doSomethingAux()
 {
-    int ch;
+    if(isDead()){
+        return;
+    }
+    if(m_jumpDist > 0){
+        if(world() -> moveOrBonk(this, getX(), getY() + 4)){
+            m_jumpDist--;
+        }else{
+            m_jumpDist = 0;
+        }
+    }else{
+        world() -> moveOrBonk(this, getX(), getY() - 4);
+    }
+    
+        int ch;
         if (world()->getKey(ch))
         {
             switch(ch){
@@ -91,15 +126,21 @@ void Peach::doSomethingAux()
                 break;
             case KEY_PRESS_RIGHT:
                     setDirection(0);
-                    if (world()->moveOrBonk(this, getX() + 4, getY()))
-                    {
-                        moveTo(getX() + 4, getY());
-                    }
-
+                    world()->moveOrBonk(this, getX() + 4, getY());
                 break;
                     
             case KEY_PRESS_UP:
                 {
+                    if(world()->isMovePossible(this, getX(), getY()-1))
+                    {
+                        if(hasShootPower())
+                        {
+                            m_jumpDist = 12;
+                        }else{
+                            m_jumpDist = 8;
+                        }
+                        
+                    }
                     break;
                 }
             case KEY_PRESS_SPACE:

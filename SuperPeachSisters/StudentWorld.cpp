@@ -84,7 +84,10 @@ bool StudentWorld::moveIfPossible(Actor *a, int destx, int desty) const
 }
 
 
-
+bool StudentWorld::isMovePossible(Actor *a, int destx, int desty) const
+{
+    return true; //TODO: CHANGE THIS
+}
 
 int StudentWorld::move()
 {

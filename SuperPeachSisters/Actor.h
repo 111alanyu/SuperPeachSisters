@@ -88,8 +88,12 @@ public:
       // Does Peach have Jump Power?
     bool hasJumpPower() const;
 
+    
 private:
     virtual void doSomethingAux();
+    int m_jumpDist;
+    bool m_hasJump;
+    bool m_hasShoot;
 };
 
 // (Further private sections won't be shown.)

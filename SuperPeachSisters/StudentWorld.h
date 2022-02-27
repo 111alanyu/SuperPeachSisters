@@ -90,6 +90,8 @@ public:
       // Grant Peach Jump Power.
     void grantJumpPower() const;
     
+    
+    
 private:
     std::vector <Actor*> m_Actors;
     Peach* m_peach;
