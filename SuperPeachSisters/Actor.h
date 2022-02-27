@@ -143,6 +143,7 @@ public:
 class Flower : public Goodie
 {
 public:
+    void doSomethingAux();
     Flower(StudentWorld* w, int x, int y);
 };
 
@@ -156,6 +157,7 @@ public:
 class Star : public Goodie
 {
 public:
+    void doSomethingAux();
     Star(StudentWorld* w, int x, int y);
 };
 

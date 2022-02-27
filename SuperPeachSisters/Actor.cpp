@@ -6,12 +6,20 @@
 using namespace std;
 void Block::getBonked(bool bonkerIsInvinciblePeach)
 {
-    cerr<<"WAS BONKED"<<endl;
     cerr<<m_g<<endl;
-    if(m_g != none){
-        if(m_g == Block::mushroom)
+    if(m_g != 0){
+        if(m_g == flower)
         {
-            cerr<<"MUSHY MMM"<<endl;
+            Flower* flow = new Flower(world(), getX(), getY() +SPRITE_HEIGHT);
+            world()->addActor(flow);
+        }
+        if(m_g == star)
+        {
+            Star* star = new Star(world(), getX(), getY() + SPRITE_HEIGHT);
+            world()->addActor(star);
+        }
+        if(m_g == mushroom)
+        {
             Mushroom* mushy = new Mushroom(world(), getX(), getY() + SPRITE_HEIGHT);
             world()->addActor(mushy);
         }
@@ -22,6 +30,22 @@ void Block::getBonked(bool bonkerIsInvinciblePeach)
 void Mushroom::doSomethingAux()
 {
     return;
+}
+
+void Flower::doSomethingAux()
+{
+    return;
+}
+
+void Star::doSomethingAux()
+{
+    return;
+}
+
+Star::Star(StudentWorld* w, int x, int y)
+:Goodie(w, IID_STAR, x, y)
+{
+    
 }
 
 bool Actor::isDead() const{
@@ -61,6 +85,12 @@ Block::Block(StudentWorld* w, int x ,int y, GoodieType g)
 :Obstacle(w, IID_BLOCK, x, y)
 {
     m_g = g;
+}
+
+Flower::Flower(StudentWorld* w, int x, int y)
+:Goodie(w, IID_FLOWER, x, y)
+{
+    
 }
 
 Peach::Peach(StudentWorld *w, int x, int y)
@@ -159,7 +189,7 @@ void Peach::doSomethingAux()
                     
                     if(!world()->isMovePossible(this, getX(), getY()-1))
                     {
-                        world()->playSound(SOUND_PLAYER_JUMP);
+                        
                         if(hasShootPower())
                         {
                             m_jumpDist = 12;

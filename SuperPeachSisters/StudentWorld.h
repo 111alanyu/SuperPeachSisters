@@ -33,13 +33,13 @@ public:
     virtual void cleanUp();
 
       // Add an actor to the world.
-    void addActor(Actor* a);
-
+    void addActor(Actor* a); //DONE
+    
       // Record that a level was finished.  The parameter is true if it was
       // the last level.
     void endLevel(bool isGameWon);
     
-    void load();
+    void load(); //DONE
 
       // If a can move to (destx,desty), move it and return true; otherwise
       // bonk the object that's blockig it and return false.
@@ -47,19 +47,19 @@ public:
 
       // If a can move to (destx,desty), move it and return true; otherwise,
       // return false.
-    bool moveIfPossible(Actor* a, int destx, int desty) const;
+    bool moveIfPossible(Actor* a, int destx, int desty) const; //DONE
 
       // If a can move to (destx,destx), return true (but don't move it);
       // otherwise (it would be blocked), return false.
-    bool isMovePossible(Actor* a, int destx, int desty) const;
+    bool isMovePossible(Actor* a, int destx, int desty) const; //DONE
 
       // If Peach overlaps bonker, bonk 'er and return true; otherwise,
       // return false.
-    bool bonkOverlappingPeach(Actor* bonker) const;
+    bool bonkOverlappingPeach(Actor* bonker) const; //DONE
 
       // If a non-Peach actor overlaps bonker, bonk that non-Peach actor and
       // return true; otherwise, return false.  (The bonker will be Peach.)
-    void bonkOverlappingActor(Actor* bonker) const;
+    bool bonkOverlappingActor(Actor* bonker) const;
 
       // If Peach overlaps damager, damage her and return true; otherwise,
       // return false.
@@ -70,7 +70,7 @@ public:
     bool damageOverlappingActor(Actor* damager) const;
 
       // Return true if a overlaps Peach; otherwise, return false.
-    bool overlapsPeach(Actor* a) const;
+    bool overlapsPeach(Actor* a) const; //DONE
 
       // If the y cooodinates of a and Peach are at least yDeltaLimit apart,
       // return false; otherwise, set xDeltaFromActor to the difference
@@ -91,6 +91,8 @@ public:
     void grantJumpPower() const;
     
     Peach* getPeach() const;
+    
+    void findBonkable(Actor* a, int destx, int desty) const;
     
     
 private:
