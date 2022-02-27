@@ -146,10 +146,11 @@ bool StudentWorld::isMovePossible(Actor *a, int destx, int desty) const
         cerr<<endl;
         
          */
-        
-        if((x2 <= x1 && x1 <= x2_Extend) || (x2 <= x1_Extend && x1_Extend <= x2_Extend)){
-            if((y2 <= y1 && y1 <= y2_Extend) || (y2 <= y1_Extend && y1_Extend <= y2_Extend)){
-                return false;
+        if(m_Actors[i] ->blocksMovement()){
+            if((x2 <= x1 && x1 <= x2_Extend) || (x2 <= x1_Extend && x1_Extend <= x2_Extend)){
+                if((y2 <= y1 && y1 <= y2_Extend) || (y2 <= y1_Extend && y1_Extend <= y2_Extend)){
+                    return false;
+                }
             }
         }
     }

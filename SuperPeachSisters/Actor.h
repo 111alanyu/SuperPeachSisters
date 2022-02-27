@@ -165,6 +165,7 @@ class Projectile : public Actor
 {
 public:
     Projectile(StudentWorld* w, int imageID, int x, int y, int dir);
+    
 };
 
 class PiranhaFireball : public Projectile

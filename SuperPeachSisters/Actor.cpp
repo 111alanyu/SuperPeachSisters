@@ -4,6 +4,12 @@
 // Students:  Add code to this file, Actor.h, StudentWorld.h, and StudentWorld.cpp
 
 using namespace std;
+
+bool Actor::blocksMovement() const
+{
+    return false;
+}
+
 void Block::getBonked(bool bonkerIsInvinciblePeach)
 {
     cerr<<m_g<<endl;
@@ -113,10 +119,6 @@ bool Obstacle::blocksMovement() const
     return true;//TODO: Check
 }
 
-bool Actor::blocksMovement() const
-{
-    return false;
-}
 
 void Actor::sufferDamageIfDamageable()
 {
