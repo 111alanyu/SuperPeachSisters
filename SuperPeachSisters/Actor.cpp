@@ -45,6 +45,54 @@ void Actor::setDead()
     m_dead = true;
 }
 
+void Koopa::setDead()
+{
+    if(!this ->isDead())
+    {
+        Shell* s = new Shell(world(), getX(), getY(), getDirection());
+        world()->addActor(s);
+        
+        Actor::setDead();
+    }
+    
+}
+
+void Shell::doSomethingAux()
+{
+    if(world()->damageOverlappingActor(this))
+    {
+        cerr<<"RET"<<endl;
+        this->setDead();
+        return;
+    }
+    
+    world()->moveIfPossible(this, getX(), getY() - 2);
+    cerr<<"GD: "<<getDirection()<<endl;
+    if(getDirection() == 0){
+        cerr<<"Z Called"<<endl;
+        if(!world() -> moveIfPossible(this, getX() + 2, getY())){
+            setDead();
+            return;
+        }
+    }else if(getDirection() == 180)
+    {
+        cerr<<"O Called"<<endl;
+        if(!world() -> moveIfPossible(this, getX() - 2, getY())){
+            setDead();
+            return;
+        }
+    }
+    
+    return;
+}
+
+
+Shell::Shell(StudentWorld* w, int x, int y, int dir)
+:Projectile(w, IID_SHELL, x, y, dir)
+{
+    
+}
+
 void Goodie::Gmove()
 {
     world() -> moveIfPossible(this, getX(), getY() - 2);
@@ -268,6 +316,7 @@ bool Enemy::sufferDamageIfDamageable()
 {
     world()->increaseScore(100);
     this->setDead();
+    cerr<<"TITTIES"<<endl;
     return true;
 }
 
@@ -467,12 +516,6 @@ void PeachFireball::doSomethingAux()
     }
     
     return;
-}
-
-Shell::Shell(StudentWorld* w, int x, int y, int dir)
-:Projectile(w, IID_SHELL, x, y, dir)
-{
-    
 }
 
 bool Actor::sufferDamageIfDamageable()

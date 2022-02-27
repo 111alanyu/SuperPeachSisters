@@ -291,7 +291,7 @@ bool StudentWorld::damageOverlappingActor(Actor *damager)const
         
             if((x2 <= x1 && x1 <= x2_Extend) || (x2 <= x1_Extend && x1_Extend <= x2_Extend)){
                 if((y2 <= y1 && y1 <= y2_Extend) || (y2 <= y1_Extend && y1_Extend <= y2_Extend)){
-                    if(m_Actors[i]->sufferDamageIfDamageable()){
+                    if(!m_Actors[i]->isDead() && m_Actors[i]->sufferDamageIfDamageable()){
                         cerr<<"SDID"<<endl;
                         return true;
                     }

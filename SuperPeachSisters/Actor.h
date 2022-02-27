@@ -40,7 +40,7 @@ public:
     void reverseDirection();
     
       // Mark this actor as dead.
-    void setDead();
+    virtual void setDead();
 
       // Is this actor dead?
     bool isDead() const;
@@ -195,6 +195,7 @@ public:
 class Shell : public Projectile
 {
 public:
+    void doSomethingAux();
     Shell(StudentWorld* w, int x, int y, int dir);
 };
 
@@ -217,7 +218,7 @@ public:
 class Koopa : public Enemy
 {
 public:
-    
+    void setDead();
     Koopa(StudentWorld* w, int x, int y);
 };
 
