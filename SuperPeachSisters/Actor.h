@@ -57,6 +57,7 @@ public:
 private:
     virtual void doSomethingAux() = 0;
     bool m_dead;
+    StudentWorld* m_world;
 };
 
 class Peach : public Actor

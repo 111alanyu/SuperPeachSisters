@@ -22,7 +22,7 @@ void LevelEnder::doSomething()
 Actor::Actor(StudentWorld* w, int ID, int x, int y, int dir, int depth)
 :GraphObject(ID, x, y)
 {
-    
+    m_world = w;
 }
 
 LevelEnder::LevelEnder(StudentWorld* w, int x, int y, bool isGameEnder)
@@ -81,6 +81,31 @@ void Peach::sufferDamageIfDamageable()
 
 void Peach::doSomethingAux()
 {
+    int ch;
+        if (world()->getKey(ch))
+        {
+            switch(ch){
+            case KEY_PRESS_LEFT:
+                    setDirection(180);
+                    world()->moveOrBonk(this, getX() - 4, getY());
+                break;
+            case KEY_PRESS_RIGHT:
+                    setDirection(0);
+                    if (world()->moveOrBonk(this, getX() + 4, getY()))
+                    {
+                        moveTo(getX() + 4, getY());
+                    }
+
+                break;
+                    
+            case KEY_PRESS_UP:
+                {
+                    break;
+                }
+            case KEY_PRESS_SPACE:
+                break;
+            }
+        }
     return;
 }
 
@@ -92,4 +117,9 @@ void Pipe::doSomethingAux()
 void LevelEnder::doSomethingAux()
 {
     return;
+}
+
+StudentWorld* Actor::world() const
+{
+    return m_world;
 }
