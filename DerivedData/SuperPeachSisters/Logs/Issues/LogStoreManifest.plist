@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>logFormatVersion</key>
+	<integer>10</integer>
+	<key>logs</key>
+	<dict>
+		<key>DF10C441-05F0-4ECC-8DD8-8B8BE8725560</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogMajorGroupSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.target.product-type.tool</string>
+			<key>fileName</key>
+			<string>DF10C441-05F0-4ECC-8DD8-8B8BE8725560.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>signature</key>
+			<string>SuperPeachSisters-fhmauwtbuizdnqaicpfvnslyllph</string>
+			<key>timeStartedRecording</key>
+			<real>667619884.77368498</real>
+			<key>timeStoppedRecording</key>
+			<real>667619884.78407896</real>
+			<key>title</key>
+			<string>Build target SuperPeachSisters</string>
+			<key>uniqueIdentifier</key>
+			<string>DF10C441-05F0-4ECC-8DD8-8B8BE8725560</string>
+		</dict>
+	</dict>
+	<key>preserveOldLogs</key>
+	<true/>
+</dict>
+</plist>
