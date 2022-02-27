@@ -220,4 +220,5 @@ public:
     void doSomethingAux();
 };
 
+
 #endif // ACTOR_INCLUDED

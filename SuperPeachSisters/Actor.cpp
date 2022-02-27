@@ -229,7 +229,7 @@ void Enemy::doSomethingAux()
     }
     
     if(getDirection() == 0){
-        if(!world()->isMovePossible(this, getX()+SPRITE_WIDTH, getY()-1)){
+        if(!world()->isMovePossible(this, getX()+SPRITE_WIDTH-1, getY()-1)){
             
             if(!world()->moveIfPossible(this, getX()+1, getY())){
                 setDirection(180);
@@ -239,7 +239,7 @@ void Enemy::doSomethingAux()
             setDirection(180);
         }
     }else{
-        if(!world()->isMovePossible(this, getX()-SPRITE_WIDTH, getY()-1)){
+        if(!world()->isMovePossible(this, getX()-SPRITE_WIDTH+1, getY()-1)){
             
             if(!world()->moveIfPossible(this, getX()-1, getY())){
                 setDirection(0);
@@ -382,4 +382,28 @@ void Goodie::doSomethingAux()
 void Piranha::doSomethingAux()
 {
     return;
+}
+
+Projectile::Projectile(StudentWorld* w, int imageID, int x, int y, int dir)
+:Actor(w, imageID, x, y)
+{
+    
+}
+
+PiranhaFireball::PiranhaFireball(StudentWorld* w, int x, int y, int dir)
+:Projectile(w, IID_PIRANHA_FIRE, x, y, dir)
+{
+    
+}
+
+PeachFireball::PeachFireball(StudentWorld* w, int x, int y, int dir)
+:Projectile(w, IID_PEACH_FIRE, x, y, dir)
+{
+    
+}
+
+Shell::Shell(StudentWorld* w, int x, int y, int dir)
+:Projectile(w, IID_SHELL, x, y, dir)
+{
+    
 }
