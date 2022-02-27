@@ -94,6 +94,7 @@ private:
     int m_jumpDist;
     bool m_hasJump;
     bool m_hasShoot;
+    bool m_invincible;
 };
 
 // (Further private sections won't be shown.)
@@ -113,6 +114,8 @@ public:
     void doSomethingAux();
     Block(StudentWorld* w, int x, int y, GoodieType g = none);
     virtual void getBonked(bool bonkerIsInvinciblePeach);
+private:
+    GoodieType m_g;
 };
 
 class Pipe : public Obstacle
@@ -146,6 +149,7 @@ public:
 class Mushroom : public Goodie
 {
 public:
+    void doSomethingAux();
     Mushroom(StudentWorld* w, int x, int y);
 };
 

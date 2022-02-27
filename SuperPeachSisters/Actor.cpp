@@ -3,7 +3,23 @@
 
 // Students:  Add code to this file, Actor.h, StudentWorld.h, and StudentWorld.cpp
 
+using namespace std;
 void Block::getBonked(bool bonkerIsInvinciblePeach)
+{
+    cerr<<"WAS BONKED"<<endl;
+    cerr<<m_g<<endl;
+    if(m_g != none){
+        if(m_g == Block::mushroom)
+        {
+            cerr<<"MUSHY MMM"<<endl;
+            Mushroom* mushy = new Mushroom(world(), getX(), getY() + SPRITE_HEIGHT);
+            world()->addActor(mushy);
+        }
+    }
+    return;
+}
+
+void Mushroom::doSomethingAux()
 {
     return;
 }
@@ -12,11 +28,6 @@ bool Actor::isDead() const{
     return m_dead;
 }
 
-
-void Block::doSomethingAux()
-{
-    return;
-}
 
 void LevelEnder::doSomething()
 {
@@ -49,7 +60,7 @@ Obstacle::Obstacle(StudentWorld* w, int imageID, int x, int y)
 Block::Block(StudentWorld* w, int x ,int y, GoodieType g)
 :Obstacle(w, IID_BLOCK, x, y)
 {
-    
+    m_g = g;
 }
 
 Peach::Peach(StudentWorld *w, int x, int y)
@@ -57,7 +68,15 @@ Peach::Peach(StudentWorld *w, int x, int y)
 {
     m_jumpDist = 0;
     m_hasJump = false;
+    m_invincible = false;
 }
+
+Mushroom::Mushroom(StudentWorld* w, int x, int y)
+:Goodie(w, IID_MUSHROOM, x, y)
+{
+    cerr<<"MUSHROOM CONSTRUCTOR CALLED"<<endl;
+}
+
 
 bool Obstacle::blocksMovement() const
 {
@@ -99,13 +118,19 @@ void Peach::gainJumpPower()
     m_hasJump = true;
 }
 
-
+void Block::doSomethingAux()
+{
+    return;
+}
 
 void Peach::doSomethingAux()
 {
     if(isDead()){
         return;
     }
+    
+    
+    
     if(m_jumpDist > 0){
         if(world() -> moveOrBonk(this, getX(), getY() + 4)){
             m_jumpDist--;
@@ -113,7 +138,7 @@ void Peach::doSomethingAux()
             m_jumpDist = 0;
         }
     }else{
-        world() -> moveOrBonk(this, getX(), getY() - 4);
+        world() -> moveIfPossible(this, getX(), getY() - 4);
     }
     
         int ch;
@@ -131,8 +156,10 @@ void Peach::doSomethingAux()
                     
             case KEY_PRESS_UP:
                 {
+                    
                     if(!world()->isMovePossible(this, getX(), getY()-1))
                     {
+                        world()->playSound(SOUND_PLAYER_JUMP);
                         if(hasShootPower())
                         {
                             m_jumpDist = 12;
@@ -163,4 +190,16 @@ void LevelEnder::doSomethingAux()
 StudentWorld* Actor::world() const
 {
     return m_world;
+}
+
+
+bool Peach::isInvincible() const
+{
+    return m_invincible;
+}
+
+Goodie::Goodie(StudentWorld* w, int imageID, int x, int y)
+:Actor(w, imageID, x, y)
+{
+    
 }

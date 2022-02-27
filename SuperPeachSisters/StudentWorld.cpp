@@ -26,15 +26,44 @@ int StudentWorld::init()
     return GWSTATUS_CONTINUE_GAME;
 }
 
+Peach* StudentWorld::getPeach() const
+{
+    return m_peach;
+}
+
+bool StudentWorld::bonkOverlappingPeach(Actor* bonker)const
+{
+    cerr<<"BONK CALLED PEACH"<<endl;
+    if(isMovePossible(bonker,getPeach()->getX(), getPeach()->getY()))
+    {
+        bonker->getBonked(getPeach() -> isInvincible());
+        return true;
+    }
+    return false;
+}
+
+void StudentWorld::bonkOverlappingActor(Actor *bonker)const
+{
+    cerr<<"BONK CALLED ACTOR"<<endl;
+    bonker->getBonked(getPeach() -> isInvincible());
+}
+
+
 bool StudentWorld::moveOrBonk(Actor *a, int destx, int desty) const
 {
     if(moveIfPossible(a, destx, desty)){
         return true;
     }else{
-        //TODO: PUT BONK CODE
+        bonkOverlappingActor(a);
         return false;
     }
     
+}
+
+void StudentWorld::addActor(Actor* a)
+{
+    m_Actors.push_back(a);
+    return;
 }
 
 bool StudentWorld::moveIfPossible(Actor *a, int destx, int desty) const
@@ -53,45 +82,51 @@ bool StudentWorld::isMovePossible(Actor *a, int destx, int desty) const
     
     for(int i = 0; i < m_Actors.size(); i++)
     {
-        int x1 = destx;
-        int y1 = desty;
-
-        int x2 = m_Actors[i]->getX();
-        int y2 = m_Actors[i]->getY();
-
-        int x1_Extend = x1 + SPRITE_WIDTH - 1;
-        int y1_Extend = y1 + SPRITE_HEIGHT -1;
-
-        int x2_Extend = x2 + SPRITE_WIDTH - 1;
-        int y2_Extend = y2 + SPRITE_HEIGHT - 1;
         
-        /* DEBUG TOOLS*/
-        /*
-        cerr<<x1<<endl;
-        cerr<<y1<<endl;
-        cerr<<x1_Extend<<endl;
-        cerr<<y1_Extend<<endl;
-        
-        cerr<<endl;
-        
-        cerr<<x2<<endl;
-        cerr<<y2<<endl;
-        cerr<<x2_Extend<<endl;
-        cerr<<y2_Extend<<endl;
-        
-        cerr<<endl;
-        cerr<<"------------------------"<<endl;
-        cerr<<endl;
-        
-         */
-        
-        if((x2 <= x1 && x1 <= x2_Extend) || (x2 <= x1_Extend && x1_Extend <= x2_Extend)){
-            if((y2 <= y1 && y1 <= y2_Extend) || (y2 <= y1_Extend && y1_Extend <= y2_Extend)){
-                return false;
-            }
-        }
     }
     
+    return true;
+}
+
+bool StudentWorld::overlapsPeach(Actor *a) const
+{
+    int x1 = getPeach()->getX();
+    int y1 = getPeach()->getY();
+
+    int x2 = a->getX();
+    int y2 = a->getY();
+
+    int x1_Extend = x1 + SPRITE_WIDTH - 1;
+    int y1_Extend = y1 + SPRITE_HEIGHT -1;
+
+    int x2_Extend = x2 + SPRITE_WIDTH - 1;
+    int y2_Extend = y2 + SPRITE_HEIGHT - 1;
+    
+    /* DEBUG TOOLS*/
+    /*
+    cerr<<x1<<endl;
+    cerr<<y1<<endl;
+    cerr<<x1_Extend<<endl;
+    cerr<<y1_Extend<<endl;
+    
+    cerr<<endl;
+    
+    cerr<<x2<<endl;
+    cerr<<y2<<endl;
+    cerr<<x2_Extend<<endl;
+    cerr<<y2_Extend<<endl;
+    
+    cerr<<endl;
+    cerr<<"------------------------"<<endl;
+    cerr<<endl;
+    
+     */
+    
+    if((x2 <= x1 && x1 <= x2_Extend) || (x2 <= x1_Extend && x1_Extend <= x2_Extend)){
+        if((y2 <= y1 && y1 <= y2_Extend) || (y2 <= y1_Extend && y1_Extend <= y2_Extend)){
+            return false;
+        }
+    }
     return true;
 }
 
@@ -152,7 +187,8 @@ void StudentWorld::load()
                         //does nothing
                         break;
                     case Level::mushroom_goodie_block:{
-                        Block* newBlock = new Block(this, i * SPRITE_WIDTH, i * SPRITE_HEIGHT);
+                        cerr<<"MUSHY CREATED"<<endl;
+                        Block* newBlock = new Block(this, i * SPRITE_WIDTH, j * SPRITE_HEIGHT, Block::mushroom);
                         m_Actors.push_back(newBlock);
                         break;
                     }

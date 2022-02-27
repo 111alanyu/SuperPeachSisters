@@ -90,6 +90,7 @@ public:
       // Grant Peach Jump Power.
     void grantJumpPower() const;
     
+    Peach* getPeach() const;
     
     
 private:
