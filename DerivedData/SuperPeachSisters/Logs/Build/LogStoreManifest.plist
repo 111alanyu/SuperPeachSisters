@@ -244,6 +244,40 @@
 			<key>uniqueIdentifier</key>
 			<string>0B5FD608-88BC-42DF-890D-5179F0A74A37</string>
 		</dict>
+		<key>0D49F222-8514-48D1-827B-BFF445F6F3AB</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>0D49F222-8514-48D1-827B-BFF445F6F3AB.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>A</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>SuperPeachSisters project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>SuperPeachSisters</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Analyze SuperPeachSisters</string>
+			<key>timeStartedRecording</key>
+			<real>667707054.25823498</real>
+			<key>timeStoppedRecording</key>
+			<real>667707059.27612805</real>
+			<key>title</key>
+			<string>Analyze SuperPeachSisters</string>
+			<key>uniqueIdentifier</key>
+			<string>0D49F222-8514-48D1-827B-BFF445F6F3AB</string>
+		</dict>
 		<key>0E834BB2-8AAE-4428-A106-2126536E9D57</key>
 		<dict>
 			<key>className</key>
@@ -583,6 +617,40 @@
 			<string>Analyze SuperPeachSisters</string>
 			<key>uniqueIdentifier</key>
 			<string>1C8C4EA4-8975-4838-9C54-F3FA7447A059</string>
+		</dict>
+		<key>1F7287E9-E855-4D43-B6C8-8F31E734FCA3</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>1F7287E9-E855-4D43-B6C8-8F31E734FCA3.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>E</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>SuperPeachSisters project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>SuperPeachSisters</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Analyze SuperPeachSisters</string>
+			<key>timeStartedRecording</key>
+			<real>667707156.37938201</real>
+			<key>timeStoppedRecording</key>
+			<real>667707156.80307603</real>
+			<key>title</key>
+			<string>Analyze SuperPeachSisters</string>
+			<key>uniqueIdentifier</key>
+			<string>1F7287E9-E855-4D43-B6C8-8F31E734FCA3</string>
 		</dict>
 		<key>1F811759-277A-48A0-B994-6BD5C5B06277</key>
 		<dict>
@@ -3950,6 +4018,40 @@
 			<key>uniqueIdentifier</key>
 			<string>8B204DDE-1D1D-40D5-B8F4-91102534A781</string>
 		</dict>
+		<key>8D8D912B-0A87-41B2-B37B-C52323E580F4</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>8D8D912B-0A87-41B2-B37B-C52323E580F4.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>E</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>SuperPeachSisters project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>SuperPeachSisters</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Analyze SuperPeachSisters</string>
+			<key>timeStartedRecording</key>
+			<real>667707258.35231602</real>
+			<key>timeStoppedRecording</key>
+			<real>667707258.77849901</real>
+			<key>title</key>
+			<string>Analyze SuperPeachSisters</string>
+			<key>uniqueIdentifier</key>
+			<string>8D8D912B-0A87-41B2-B37B-C52323E580F4</string>
+		</dict>
 		<key>8E5F883A-D5CA-43CD-9801-32B041B8D18A</key>
 		<dict>
 			<key>className</key>
@@ -5344,6 +5446,40 @@
 			<key>uniqueIdentifier</key>
 			<string>BA5AE1A4-3269-4F16-81E8-936AE5AD0057</string>
 		</dict>
+		<key>BBA4107A-524A-4904-A08E-74CAE58A6C81</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>BBA4107A-524A-4904-A08E-74CAE58A6C81.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>SuperPeachSisters project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>SuperPeachSisters</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build SuperPeachSisters</string>
+			<key>timeStartedRecording</key>
+			<real>667707274.24530303</real>
+			<key>timeStoppedRecording</key>
+			<real>667707274.80729902</real>
+			<key>title</key>
+			<string>Build SuperPeachSisters</string>
+			<key>uniqueIdentifier</key>
+			<string>BBA4107A-524A-4904-A08E-74CAE58A6C81</string>
+		</dict>
 		<key>BBE76F12-44FC-417C-B9E9-B1E001D9C780</key>
 		<dict>
 			<key>className</key>
@@ -5479,6 +5615,40 @@
 			<string>Analyze SuperPeachSisters</string>
 			<key>uniqueIdentifier</key>
 			<string>C0750AC2-3497-4915-8BE9-2B8CE560AD3F</string>
+		</dict>
+		<key>C08DABA9-7728-4EA6-9F78-DCA9509AEE95</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>C08DABA9-7728-4EA6-9F78-DCA9509AEE95.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>A</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>SuperPeachSisters project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>SuperPeachSisters</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Analyze SuperPeachSisters</string>
+			<key>timeStartedRecording</key>
+			<real>667707329.87325394</real>
+			<key>timeStoppedRecording</key>
+			<real>667707334.67863405</real>
+			<key>title</key>
+			<string>Analyze SuperPeachSisters</string>
+			<key>uniqueIdentifier</key>
+			<string>C08DABA9-7728-4EA6-9F78-DCA9509AEE95</string>
 		</dict>
 		<key>C1D8958E-577A-494F-8DD9-16F05C0D6B30</key>
 		<dict>
@@ -5717,6 +5887,40 @@
 			<string>Analyze SuperPeachSisters</string>
 			<key>uniqueIdentifier</key>
 			<string>C6B4C8E7-4DFC-4044-9738-136DCCFDBE67</string>
+		</dict>
+		<key>C7118B81-9F3D-4166-92A4-266A054672B8</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>C7118B81-9F3D-4166-92A4-266A054672B8.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>SuperPeachSisters project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>SuperPeachSisters</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build SuperPeachSisters</string>
+			<key>timeStartedRecording</key>
+			<real>667707335.18155706</real>
+			<key>timeStoppedRecording</key>
+			<real>667707335.23019803</real>
+			<key>title</key>
+			<string>Build SuperPeachSisters</string>
+			<key>uniqueIdentifier</key>
+			<string>C7118B81-9F3D-4166-92A4-266A054672B8</string>
 		</dict>
 		<key>C755E17A-DFD0-4F98-9E07-757C110E66AC</key>
 		<dict>
@@ -6873,6 +7077,40 @@
 			<string>Analyze SuperPeachSisters</string>
 			<key>uniqueIdentifier</key>
 			<string>E1DE3F89-C415-4EE5-B266-E260143AE1B9</string>
+		</dict>
+		<key>E1E76176-36F7-4783-AFAE-6F6B3C0889C9</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>E1E76176-36F7-4783-AFAE-6F6B3C0889C9.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>E</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>SuperPeachSisters project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>SuperPeachSisters</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Analyze SuperPeachSisters</string>
+			<key>timeStartedRecording</key>
+			<real>667707155.41801703</real>
+			<key>timeStoppedRecording</key>
+			<real>667707155.88682306</real>
+			<key>title</key>
+			<string>Analyze SuperPeachSisters</string>
+			<key>uniqueIdentifier</key>
+			<string>E1E76176-36F7-4783-AFAE-6F6B3C0889C9</string>
 		</dict>
 		<key>E281EEC3-314F-4F1F-9F56-5E287B1F7119</key>
 		<dict>

@@ -14,6 +14,8 @@ bool Actor::blocksMovement() const
     return false;
 }
 
+
+
 void Peach::setTempInvis(int num)
 {
     m_tempInvTime = num;
@@ -23,6 +25,7 @@ bool Peach::hasStarPower()const
 {
     return m_hasStar;
 }
+
 
 void Block::getBonked(bool bonkerIsInvinciblePeach)
 {
@@ -343,6 +346,13 @@ Enemy::Enemy(StudentWorld* w, int imageID, int x, int y, int dir)
 
 void Enemy::getBonked(bool bonkerIsInvinciblePeach)
 {
+    if(world()->getPeach()->isInvincible())
+    {
+        world()->playSound(SOUND_PLAYER_KICK);
+        world()->increaseScore(100);
+        this->setDead();
+        return;
+    }
     return;
 }
 
@@ -457,10 +467,12 @@ void PiranhaFireball::doSomethingAux()
             if(world()->getPeach()->hasShootPower() || world()->getPeach()->hasJumpPower())
             {
                 world()->getPeach()->removePowers();
-                world()->getPeach()->setTempInvis(10); 
+                world()->getPeach()->setTempInvis(10);
             }
         }
         world()->getPeach()->getBonked(world()->getPeach()->isInvincible() || world()->getPeach()->isInvincible());
+        
+        world()->bonkOverlappingActor(this);
         this->setDead();
         return;
     }
