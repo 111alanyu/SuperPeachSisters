@@ -100,6 +100,9 @@ public:
 private:
     std::vector <Actor*> m_Actors;
     Peach* m_peach;
+    
+    bool nextLvl;
+    bool gameEnded;
 };
 
 #endif // STUDENTWORLD_INCLUDED

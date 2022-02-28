@@ -141,8 +141,22 @@ Star::Star(StudentWorld* w, int x, int y)
 
 
 
+
 void LevelEnder::doSomething()
 {
+    if(!isDead())
+    {
+        return;
+    }
+    
+    if(world()->overlapsPeach(this))
+    {
+        world()->increaseScore(1000);
+        this->setDead();
+        world()->endLevel(m_isLvlEnder);
+        world()->playSound(SOUND_FINISHED_LEVEL);
+        
+    }
     return;
 }
 
@@ -155,10 +169,10 @@ Actor::Actor(StudentWorld* w, int ID, int x, int y, int dir, int depth)
     m_dead = false;
 }
 
-LevelEnder::LevelEnder(StudentWorld* w, int x, int y, bool isGameEnder)
-:Actor(w, IID_FLAG, x, y)
+LevelEnder::LevelEnder(StudentWorld* w, int imageID, int x, int y, bool isGameEnder)
+:Actor(w, imageID, x, y)
 {
-    
+    m_isLvlEnder = isGameEnder;
 }
 
 Pipe::Pipe(StudentWorld* w, int x, int y)

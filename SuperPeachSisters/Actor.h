@@ -13,6 +13,8 @@
 
 class StudentWorld;
 
+
+
 class Actor : public GraphObject
 {
 public:
@@ -149,7 +151,9 @@ class LevelEnder : public Actor
 public:
     void doSomething();
     void doSomethingAux() override;
-    LevelEnder(StudentWorld* w, int x, int y, bool isGameEnder);
+    LevelEnder(StudentWorld* w, int imageID, int x, int y, bool isGameEnder);
+private:
+    bool m_isLvlEnder;
 };
 
 class Goodie : public Actor

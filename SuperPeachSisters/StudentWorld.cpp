@@ -17,7 +17,8 @@ GameWorld* createStudentWorld(string assetPath)
 StudentWorld::StudentWorld(string assetPath)
 : GameWorld(assetPath)
 {
-    
+    gameEnded = false;
+    nextLvl = false;
 }
 
 
@@ -250,6 +251,7 @@ int StudentWorld::move()
             m_Actors.erase(m_Actors.begin()+i);
         }
         
+        
     }
     m_peach -> doSomething();
 
@@ -358,7 +360,7 @@ void StudentWorld::load()
                         break;
                     }
                     case Level::flag:{
-                        LevelEnder* newFlag = new LevelEnder(this, i * SPRITE_WIDTH, j * SPRITE_HEIGHT, false);
+                        LevelEnder* newFlag = new LevelEnder(this, IID_FLAG, i * SPRITE_WIDTH, j * SPRITE_HEIGHT, false);
                         m_Actors.push_back(newFlag);
                         break;
                     }
@@ -391,6 +393,13 @@ void StudentWorld::load()
                         m_Actors.push_back(newPiranha);
                         break;
                     }
+                        
+                    case Level::mario:
+                    {
+                        LevelEnder* newMar = new LevelEnder(this, IID_MARIO, i * SPRITE_WIDTH, j * SPRITE_HEIGHT, true);
+                        m_Actors.push_back(newMar);
+                        break;
+                    }
                     default:
                         cout<< "Unhandled" <<endl;
                         break;
@@ -403,6 +412,11 @@ void StudentWorld::load()
     
 }
 
+
+void StudentWorld::endLevel(bool isGameWon)
+{
+    
+}
 
 bool StudentWorld::getPeachTargetingInfo(Actor* a, int yDeltaLimit, int& xDeltaFromActor) const
 {
