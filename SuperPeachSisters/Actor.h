@@ -93,6 +93,10 @@ public:
     
     int getHP() const;
     
+    void removePowers();
+    
+    int isInvincibleTime() const;
+    
     
     
 private:
@@ -100,6 +104,7 @@ private:
     int m_jumpDist;
     bool m_hasJump;
     bool m_hasShoot;
+    bool m_hasStar;
     bool m_invincible;
     int m_invicibleTime;
     int m_hp;
@@ -183,6 +188,7 @@ class PiranhaFireball : public Projectile
 {
 public:
     PiranhaFireball(StudentWorld* w, int x, int y, int dir);
+    void doSomethingAux();
 };
 
 class PeachFireball : public Projectile
@@ -230,6 +236,8 @@ public:
 private:
     int m_fireDelay; 
 };
+
+
 
 
 #endif // ACTOR_INCLUDED

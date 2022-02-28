@@ -14,6 +14,11 @@ bool Actor::blocksMovement() const
     return false;
 }
 
+int Peach::isInvincibleTime() const
+{
+    return m_invicibleTime;
+}
+
 void Block::getBonked(bool bonkerIsInvinciblePeach)
 {
     cerr<<m_g<<endl;
@@ -117,7 +122,6 @@ void Peach::gainShootPower()
 
 void Peach::gainInvincibility(int ticks)
 {
-    m_invincible = true;
     m_invicibleTime = ticks;
 }
 
@@ -266,6 +270,12 @@ bool Enemy::blocksMovement()const
     return false;
 }
 
+void Peach::removePowers()
+{
+    m_hasJump = false;
+    m_hasShoot = false;
+}
+
 void Enemy::doSomethingAux()
 {
     if(isDead())
@@ -275,7 +285,15 @@ void Enemy::doSomethingAux()
     
     if(world()->overlapsPeach(this))
     {
-        world()->getPeach()->getBonked(world()->getPeach()->isInvincible());
+        if(!world()->getPeach()->isInvincible())
+        {
+            if(world()->getPeach()->hasShootPower() || world()->getPeach()->hasJumpPower())
+            {
+                world()->getPeach()->removePowers();
+                world()->getPeach()->gainInvincibility(10);
+            }
+        }
+        world()->getPeach()->getBonked(world()->getPeach()->isInvincible() || world()->getPeach()->isInvincibleTime() > 0);
     }
     
     if(getDirection() == 0){
@@ -383,15 +401,47 @@ void Piranha::doSomethingAux()
     
     if(sDist < (8* SPRITE_WIDTH))
     {
-        cerr<<"FIRE!!!"<<endl;
+        PiranhaFireball* pf = new PiranhaFireball(world(), getX(), getY(), getDirection());
+        world()->addActor(pf);
+        m_fireDelay = 40;
     }
-    
-    
-        
+
     
     return;
 }
 
+PiranhaFireball::PiranhaFireball(StudentWorld* w, int x, int y, int dir)
+:Projectile(w, IID_PIRANHA_FIRE, x, y, dir)
+{
+    
+}
+
+void PiranhaFireball::doSomethingAux()
+{
+    if(world()->overlapsPeach(this))
+    {
+        world()->getPeach()->getBonked(world()->getPeach()->isInvincible());
+        this->setDead();
+        return;
+    }
+    world()->moveIfPossible(this, getX(), getY() - 2);
+    
+    if(getDirection() == 0){
+        cerr<<"Z Called"<<endl;
+        if(!world() -> moveIfPossible(this, getX() + 2, getY())){
+            setDead();
+            return;
+        }
+    }else if(getDirection() == 180)
+    {
+        cerr<<"O Called"<<endl;
+        if(!world() -> moveIfPossible(this, getX() - 2, getY())){
+            setDead();
+            return;
+        }
+    }
+    return;
+}
 
 
 void Peach::doSomethingAux()
@@ -518,6 +568,7 @@ void Mushroom::gainPower()
 void Star::gainPower()
 {
     world()->getPeach()->gainInvincibility(150);
+    
 }
 
 
@@ -528,11 +579,6 @@ Projectile::Projectile(StudentWorld* w, int imageID, int x, int y, int dir)
     
 }
 
-PiranhaFireball::PiranhaFireball(StudentWorld* w, int x, int y, int dir)
-:Projectile(w, IID_PIRANHA_FIRE, x, y, dir)
-{
-    
-}
 
 PeachFireball::PeachFireball(StudentWorld* w, int x, int y, int dir)
 :Projectile(w, IID_PEACH_FIRE, x, y, dir)
