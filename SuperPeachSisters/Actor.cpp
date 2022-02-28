@@ -166,10 +166,6 @@ bool Peach::blocksMovement() const
     return false;
 }
 
-bool Enemy::blocksMovement()const
-{
-    return false;
-}
 
 void Peach::removePowers()
 {
@@ -267,7 +263,7 @@ Obstacle::Obstacle(StudentWorld* w, int imageID, int x, int y)
 
 bool Obstacle::blocksMovement() const
 {
-    return true;//TODO: Check
+    return true;
 }
 
 

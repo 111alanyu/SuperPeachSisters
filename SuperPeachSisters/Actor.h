@@ -35,11 +35,6 @@ public:
       // Do what the spec says happens when damage is inflicted on this actor.
     virtual bool sufferDamageIfDamageable();
 
-      // Fall the indicated distance if not blocked.
-    void fallIfPossible(int dist);
-
-      // Reverse the direction this actor is facing.
-    void reverseDirection();
     
       // Mark this actor as dead.
     virtual void setDead();
@@ -52,10 +47,6 @@ public:
 
       // Get this actor's world
     StudentWorld* world() const;
-
-      // Set destx and desty to the coordinates dist pixels away in direction
-      // dir from this actor's position.
-    void converDirectionAndDistanceToXY(int dir, int dist, int& destx, int& desty) const;
 
 private:
     virtual void doSomethingAux() = 0;
@@ -131,10 +122,10 @@ class Block : public Obstacle
 {
 public:
     enum GoodieType { none, flower, mushroom, star };
-    void doSomethingAux();
     Block(StudentWorld* w, int x, int y, GoodieType g = none);
     void getBonked(bool bonkerIsInvinciblePeach);
 private:
+    void doSomethingAux();
     GoodieType m_g;
 };
 
@@ -142,16 +133,16 @@ class Pipe : public Obstacle
 {
 public:
     Pipe(StudentWorld* w, int x, int y);
+private:
     void doSomethingAux() override;
-    void doSomething();
 };
 
 class LevelEnder : public Actor
 {
 public:
-    void doSomethingAux() override;
     LevelEnder(StudentWorld* w, int imageID, int x, int y, bool isGameEnder);
 private:
+    void doSomethingAux() override;
     bool m_isLvlEnder;
 };
 
@@ -160,8 +151,9 @@ class Goodie : public Actor
 public:
     Goodie(StudentWorld* w, int imageID, int x, int y);
     void Gmove();
-    void doSomethingAux();
     virtual void gainPower() = 0;
+private:
+    void doSomethingAux();
 };
 
 class Flower : public Goodie
@@ -189,28 +181,30 @@ class Projectile : public Actor
 {
 public:
     Projectile(StudentWorld* w, int imageID, int x, int y, int dir);
-    
 };
 
 class PiranhaFireball : public Projectile
 {
 public:
     PiranhaFireball(StudentWorld* w, int x, int y, int dir);
+private:
     void doSomethingAux();
 };
 
 class PeachFireball : public Projectile
 {
 public:
-    void doSomethingAux();
     PeachFireball(StudentWorld* w, int x, int y, int dir);
+private:
+    void doSomethingAux();
 };
 
 class Shell : public Projectile
 {
 public:
-    void doSomethingAux();
     Shell(StudentWorld* w, int x, int y, int dir);
+private:
+    void doSomethingAux();
 };
 
 class Enemy : public Actor
@@ -219,8 +213,8 @@ public:
     Enemy(StudentWorld* w, int imageID, int x, int y, int dir);
     virtual void getBonked(bool bonkerIsInvinciblePeach);
     virtual bool sufferDamageIfDamageable();
+private:
     void doSomethingAux();
-    bool blocksMovement() const;
 };
 
 class Goomba : public Enemy
@@ -240,8 +234,8 @@ class Piranha : public Enemy
 {
 public:
     Piranha(StudentWorld* w, int x, int y);
-    void doSomethingAux();
 private:
+    void doSomethingAux();
     int m_fireDelay; 
 };
 
