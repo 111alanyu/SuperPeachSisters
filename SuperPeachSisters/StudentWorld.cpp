@@ -403,3 +403,19 @@ void StudentWorld::load()
     
 }
 
+
+bool StudentWorld::getPeachTargetingInfo(Actor* a, int yDeltaLimit, int& xDeltaFromActor) const
+{
+    int tempAY = a->getY();
+    int peachY = getPeach() -> getY();
+    
+    int dif = abs(tempAY - peachY);
+    
+    if(dif > yDeltaLimit)
+    {
+        return false;
+    }
+    
+    xDeltaFromActor = getPeach()->getX() - a->getX();
+    return true;
+}

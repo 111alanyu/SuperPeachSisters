@@ -79,16 +79,16 @@ public:
     bool getPeachTargetingInfo(Actor* a, int yDeltaLimit, int& xDeltaFromActor) const;
 
       // Set Peach's hit points to hp.
-    void setPeachHP(int hp) const;
+    void setPeachHP(int hp) const; //done
 
       // Grant Peach invincibility for this number of ticks.
-    void grantInvincibility(int ticks) const;
+    void grantInvincibility(int ticks) const; //done
 
       // Grant Peach Shoot Power.
-    void grantShootPower() const;
+    void grantShootPower() const; //done
 
       // Grant Peach Jump Power.
-    void grantJumpPower() const;
+    void grantJumpPower() const; //done
     
     Peach* getPeach() const;
     

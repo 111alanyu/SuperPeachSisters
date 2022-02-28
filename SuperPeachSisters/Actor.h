@@ -202,7 +202,7 @@ public:
 class Enemy : public Actor
 {
 public:
-    Enemy(StudentWorld* w, int imageID, int x, int y);
+    Enemy(StudentWorld* w, int imageID, int x, int y, int dir);
     virtual void getBonked(bool bonkerIsInvinciblePeach);
     virtual bool sufferDamageIfDamageable();
     void doSomethingAux();
@@ -227,6 +227,8 @@ class Piranha : public Enemy
 public:
     Piranha(StudentWorld* w, int x, int y);
     void doSomethingAux();
+private:
+    int m_fireDelay; 
 };
 
 

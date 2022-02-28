@@ -301,8 +301,8 @@ void Enemy::doSomethingAux()
     return;
 }
 
-Enemy::Enemy(StudentWorld* w, int imageID, int x, int y)
-:Actor(w, imageID, x, y)
+Enemy::Enemy(StudentWorld* w, int imageID, int x, int y, int dir)
+:Actor(w, imageID, x, y, dir)
 {
     
 }
@@ -321,22 +321,77 @@ bool Enemy::sufferDamageIfDamageable()
 }
 
 Goomba::Goomba(StudentWorld* w, int x, int y)
-:Enemy(w, IID_GOOMBA, x, y)
+:Enemy(w, IID_GOOMBA, x, y, (randInt(0, 1) * 180))
 {
     
 }
 
 Koopa::Koopa(StudentWorld* w, int x, int y)
-:Enemy(w, IID_KOOPA, x, y)
+:Enemy(w, IID_KOOPA, x, y, (randInt(0,1) * 180))
 {
     
 }
 
 Piranha::Piranha(StudentWorld* w, int x, int y)
-:Enemy(w, IID_PIRANHA, x, y)
+:Enemy(w, IID_PIRANHA, x, y, (randInt(0,1) * 180))
 {
-    
+    m_fireDelay = 0;
 }
+
+void Piranha::doSomethingAux()
+{
+    if(isDead())
+    {
+        return;
+    }
+    
+    increaseAnimationNumber();
+    
+    if(world()->overlapsPeach(this))
+    {
+        world()->getPeach()->getBonked(world()->getPeach()->isInvincible());
+    }
+    
+    int y = this->getY();
+    int yMin = y - 1.5 * SPRITE_HEIGHT;
+    int yMax = y + 1.5 * SPRITE_HEIGHT;
+    
+    int pY = world()->getPeach()->getY();
+    int pX = world()->getPeach()->getX();
+    
+    if(!(yMin <= pY && pY <= yMax))
+    {
+        cerr<<"NOT THE SAME LEVEL: P: "<<y<<endl;
+        cerr<<"PEACH Y: "<<pY<<endl;
+        return;
+    }
+    
+    if(pX <= this->getX())
+    {
+        setDirection(180);
+    }else if (pX >this->getX()){
+        setDirection(0);
+    }
+    
+    if(m_fireDelay > 0)
+    {
+        m_fireDelay--;
+        return;
+    }
+    
+    int sDist = abs(pX - this->getX());
+    
+    if(sDist < (8* SPRITE_WIDTH))
+    {
+        cerr<<"FIRE!!!"<<endl;
+    }
+    
+    
+        
+    
+    return;
+}
+
 
 
 void Peach::doSomethingAux()
@@ -466,10 +521,6 @@ void Star::gainPower()
 }
 
 
-void Piranha::doSomethingAux()
-{
-    return;
-}
 
 Projectile::Projectile(StudentWorld* w, int imageID, int x, int y, int dir)
 :Actor(w, imageID, x, y, dir)
