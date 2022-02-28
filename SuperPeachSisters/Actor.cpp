@@ -8,7 +8,7 @@ using namespace std;
 /*----------------ACTOR----------------*/
 
 Actor::Actor(StudentWorld* w, int ID, int x, int y, int dir, int depth)
-:GraphObject(ID, x, y, dir)
+:GraphObject(ID, x, y, dir, depth)
 {
     m_world = w;
     m_dead = false;
@@ -43,7 +43,7 @@ bool Actor::sufferDamageIfDamageable()
 /*-------------PEACH-----------------*/
 
 Peach::Peach(StudentWorld *w, int x, int y)
-:Actor(w, IID_PEACH, x, y)
+:Actor(w, IID_PEACH, x, y, 0, 0)
 {
     m_jumpDist = 0;
     m_hasJump = false;
@@ -260,7 +260,7 @@ void Peach::doSomethingAux()
 
 /*-------------OBSTICLE------------*/
 Obstacle::Obstacle(StudentWorld* w, int imageID, int x, int y)
-:Actor(w, imageID, x, y)
+:Actor(w, imageID, x, y, 0, 2)
 {
     
 }
@@ -348,7 +348,7 @@ void LevelEnder::doSomethingAux()
 }
 
 LevelEnder::LevelEnder(StudentWorld* w, int imageID, int x, int y, bool isGameEnder)
-:Actor(w, imageID, x, y)
+:Actor(w, imageID, x, y, 0, 1)
 {
     m_isLvlEnder = isGameEnder;
 }
@@ -357,7 +357,7 @@ LevelEnder::LevelEnder(StudentWorld* w, int imageID, int x, int y, bool isGameEn
 /*---------GOODIE----------------*/
 
 Goodie::Goodie(StudentWorld* w, int imageID, int x, int y)
-:Actor(w, imageID, x, y)
+:Actor(w, imageID, x, y, 0, 1)
 {
     
 }
@@ -436,7 +436,7 @@ void Star::gainPower()
 
 /*---------PROJECTILE-----------------*/
 Projectile::Projectile(StudentWorld* w, int imageID, int x, int y, int dir)
-:Actor(w, imageID, x, y, dir)
+:Actor(w, imageID, x, y, dir, 1)
 {
     
 }
@@ -607,7 +607,7 @@ void Enemy::doSomethingAux()
 }
 
 Enemy::Enemy(StudentWorld* w, int imageID, int x, int y, int dir)
-:Actor(w, imageID, x, y, dir)
+:Actor(w, imageID, x, y, dir, 0)
 {
     
 }
