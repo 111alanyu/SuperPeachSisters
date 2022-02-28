@@ -14,9 +14,14 @@ bool Actor::blocksMovement() const
     return false;
 }
 
-int Peach::isInvincibleTime() const
+void Peach::setTempInvis(int num)
 {
-    return m_invicibleTime;
+    m_tempInvTime = num;
+}
+
+bool Peach::hasStarPower()const
+{
+    return m_hasStar;
 }
 
 void Block::getBonked(bool bonkerIsInvinciblePeach)
@@ -182,9 +187,12 @@ Peach::Peach(StudentWorld *w, int x, int y)
 {
     m_jumpDist = 0;
     m_hasJump = false;
-    m_invincible = false;
+    m_hasStar = false;
+    m_hasShoot = false;
     m_hp = 1;
     m_timeToNext = 0;
+    m_invicibleTime = 0;
+    m_tempInvTime = 0;
 }
 
 Mushroom::Mushroom(StudentWorld* w, int x, int y)
@@ -225,7 +233,7 @@ void Peach::getBonked(bool a){
     }
     int temp = getHP() - 1;
     setHP(temp);
-    m_invicibleTime = 10;
+
     m_hasShoot = false;
     m_hasJump = false;
     world()->playSound(SOUND_PLAYER_HURT);
@@ -290,10 +298,10 @@ void Enemy::doSomethingAux()
             if(world()->getPeach()->hasShootPower() || world()->getPeach()->hasJumpPower())
             {
                 world()->getPeach()->removePowers();
-                world()->getPeach()->gainInvincibility(10);
+                world()->getPeach()->setTempInvis(10);
             }
         }
-        world()->getPeach()->getBonked(world()->getPeach()->isInvincible() || world()->getPeach()->isInvincibleTime() > 0);
+        world()->getPeach()->getBonked(world()->getPeach()->isInvincible() || world()->getPeach()->isInvincible());
     }
     
     if(getDirection() == 0){
@@ -420,10 +428,19 @@ void PiranhaFireball::doSomethingAux()
 {
     if(world()->overlapsPeach(this))
     {
-        world()->getPeach()->getBonked(world()->getPeach()->isInvincible());
+        if(!world()->getPeach()->isInvincible())
+        {
+            if(world()->getPeach()->hasShootPower() || world()->getPeach()->hasJumpPower())
+            {
+                world()->getPeach()->removePowers();
+                world()->getPeach()->setTempInvis(10);
+            }
+        }
+        world()->getPeach()->getBonked(world()->getPeach()->isInvincible() || world()->getPeach()->isInvincible());
         this->setDead();
         return;
     }
+    
     world()->moveIfPossible(this, getX(), getY() - 2);
     
     if(getDirection() == 0){
@@ -446,6 +463,8 @@ void PiranhaFireball::doSomethingAux()
 
 void Peach::doSomethingAux()
 {
+    cerr<<"IN: "<<m_invicibleTime<<endl;
+    cerr<<"IN TEMP: "<<m_tempInvTime<<endl;
     if(isDead()){
         return;
     }
@@ -454,8 +473,15 @@ void Peach::doSomethingAux()
     {
         m_invicibleTime--;
     }else if(m_invicibleTime == 0){
-        m_invincible = false;
+        m_hasStar = false;
     }
+    
+    
+    if(m_tempInvTime != 0)
+    {
+        m_tempInvTime--;
+    }
+    
     
     if(m_timeToNext > 0)
     {
@@ -535,7 +561,11 @@ StudentWorld* Actor::world() const
 
 bool Peach::isInvincible() const
 {
-    return m_invincible;
+    if(m_invicibleTime > 0 || m_tempInvTime > 0){
+        return true;
+    }else{
+        return false;
+    }
 }
 
 Goodie::Goodie(StudentWorld* w, int imageID, int x, int y)
@@ -565,10 +595,15 @@ void Mushroom::gainPower()
     world()->getPeach()->gainJumpPower();
 }
 
+void Peach::gainStarPower()
+{
+    m_hasStar = true;
+}
+
 void Star::gainPower()
 {
+    world()->getPeach()->gainStarPower();
     world()->getPeach()->gainInvincibility(150);
-    
 }
 
 

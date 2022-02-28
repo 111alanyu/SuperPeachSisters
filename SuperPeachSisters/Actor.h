@@ -82,6 +82,8 @@ public:
       // Grant Peach Jump Power.
     void gainJumpPower();
     
+    void gainStarPower();
+    
       // Is Peach invincible?
     bool isInvincible() const;
     
@@ -94,9 +96,10 @@ public:
     int getHP() const;
     
     void removePowers();
+
+    bool hasStarPower() const;
     
-    int isInvincibleTime() const;
-    
+    void setTempInvis(int num);
     
     
 private:
@@ -104,9 +107,11 @@ private:
     int m_jumpDist;
     bool m_hasJump;
     bool m_hasShoot;
+    
     bool m_hasStar;
-    bool m_invincible;
     int m_invicibleTime;
+    int m_tempInvTime;
+    
     int m_hp;
     int m_timeToNext;
 };

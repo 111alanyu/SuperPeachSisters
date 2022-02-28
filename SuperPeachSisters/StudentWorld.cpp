@@ -220,7 +220,7 @@ void StudentWorld::displayText()
         fire = " ShootPower!";
     }
     
-    if(m_peach->isInvincible()){
+    if(m_peach-> hasStarPower()){
         star = " StarPower!";
     }
     
