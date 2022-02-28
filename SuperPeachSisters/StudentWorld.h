@@ -27,19 +27,18 @@ class StudentWorld : public GameWorld
 public:
     StudentWorld(std::string assetDir);
     virtual ~StudentWorld();
-    
     virtual int init();
     virtual int move();
     virtual void cleanUp();
 
       // Add an actor to the world.
-    void addActor(Actor* a); //DONE
+    void addActor(Actor* a); 
     
       // Record that a level was finished.  The parameter is true if it was
       // the last level.
     void endLevel(bool isGameWon);
     
-    void load(); //DONE
+    void load();
 
       // If a can move to (destx,desty), move it and return true; otherwise
       // bonk the object that's blockig it and return false.
@@ -47,23 +46,20 @@ public:
 
       // If a can move to (destx,desty), move it and return true; otherwise,
       // return false.
-    bool moveIfPossible(Actor* a, int destx, int desty) const; //DONE
+    bool moveIfPossible(Actor* a, int destx, int desty) const;
 
       // If a can move to (destx,destx), return true (but don't move it);
       // otherwise (it would be blocked), return false.
-    bool isMovePossible(Actor* a, int destx, int desty) const; //DONE
+    bool isMovePossible(Actor* a, int destx, int desty) const;
 
       // If Peach overlaps bonker, bonk 'er and return true; otherwise,
       // return false.
-    bool bonkOverlappingPeach(Actor* bonker) const; //DONE
+    bool bonkOverlappingPeach(Actor* bonker) const;
 
       // If a non-Peach actor overlaps bonker, bonk that non-Peach actor and
       // return true; otherwise, return false.  (The bonker will be Peach.)
-    bool bonkOverlappingActor(Actor* bonker) const; //DONE
+    bool bonkOverlappingActor(Actor* bonker) const;
 
-      // If Peach overlaps damager, damage her and return true; otherwise,
-      // return false.
-    bool damageOverlappingPeach(Actor* damager) const;
 
       // If a non-Peach actor overlaps damager, damage that non-Peach actor
       // and return true; otherwise, return false.
