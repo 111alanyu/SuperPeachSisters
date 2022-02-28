@@ -142,10 +142,12 @@ Star::Star(StudentWorld* w, int x, int y)
 
 
 
-void LevelEnder::doSomething()
+void LevelEnder::doSomethingAux()
 {
-    if(!isDead())
+    cerr<<"LVL DO SOMETHING"<<endl;
+    if(isDead())
     {
+        cerr<<"dead"<<endl;
         return;
     }
     
@@ -153,6 +155,7 @@ void LevelEnder::doSomething()
     {
         world()->increaseScore(1000);
         this->setDead();
+        cerr<<"BVF"<<endl;
         world()->endLevel(m_isLvlEnder);
         world()->playSound(SOUND_FINISHED_LEVEL);
         
@@ -598,10 +601,6 @@ void Pipe::doSomethingAux()
     return;
 }
 
-void LevelEnder::doSomethingAux()
-{
-    return;
-}
 
 StudentWorld* Actor::world() const
 {

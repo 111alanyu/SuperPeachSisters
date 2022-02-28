@@ -251,7 +251,16 @@ int StudentWorld::move()
             m_Actors.erase(m_Actors.begin()+i);
         }
         
-        
+        if(gameEnded)
+        {
+            gameEnded = false;
+            return GWSTATUS_PLAYER_WON;
+        }
+        if(nextLvl)
+        {
+            nextLvl = false;
+            return GWSTATUS_FINISHED_LEVEL;
+        }
     }
     m_peach -> doSomething();
 
@@ -313,9 +322,20 @@ StudentWorld::~StudentWorld()
 
 void StudentWorld::load()
 {
+    ostringstream l;
+    l.setf(ios::fixed);
+    l.precision(2);
     
+    string before = "level";
+    string after = ".txt";
+    
+    l << before <<setw(2)<< setfill('0')<<getLevel()<<after;
+    
+    string done = l.str();
+    cerr<<done<<endl;
     Level lev(assetPath());
-    string level_file = "level01.txt";
+    string level_file = done;
+    
     Level::LoadResult result = lev.loadLevel(level_file);
     if (result == Level::load_fail_file_not_found)
         cerr << "Could not find level01.txt data file" << endl;
@@ -401,7 +421,6 @@ void StudentWorld::load()
                         break;
                     }
                     default:
-                        cout<< "Unhandled" <<endl;
                         break;
                         
                 }
@@ -415,7 +434,12 @@ void StudentWorld::load()
 
 void StudentWorld::endLevel(bool isGameWon)
 {
-    
+    if(isGameWon)
+    {
+        gameEnded = true;
+    }else{
+        nextLvl = true;
+    }
 }
 
 bool StudentWorld::getPeachTargetingInfo(Actor* a, int yDeltaLimit, int& xDeltaFromActor) const

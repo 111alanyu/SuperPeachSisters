@@ -149,7 +149,6 @@ public:
 class LevelEnder : public Actor
 {
 public:
-    void doSomething();
     void doSomethingAux() override;
     LevelEnder(StudentWorld* w, int imageID, int x, int y, bool isGameEnder);
 private:
