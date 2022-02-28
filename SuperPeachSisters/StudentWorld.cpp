@@ -236,6 +236,12 @@ int StudentWorld::move()
 {
     displayText();
     
+    if(getLives() == 0)
+    {
+        playSound(SOUND_GAME_OVER);
+        
+    }
+    
     if(m_peach -> isDead())
     {
         playSound(SOUND_PLAYER_DIE);
@@ -253,11 +259,13 @@ int StudentWorld::move()
         if(gameEnded)
         {
             gameEnded = false;
+            playSound(SOUND_GAME_OVER);
             return GWSTATUS_PLAYER_WON;
         }
         if(nextLvl)
         {
             nextLvl = false;
+            playSound(SOUND_FINISHED_LEVEL);
             return GWSTATUS_FINISHED_LEVEL;
         }
     }

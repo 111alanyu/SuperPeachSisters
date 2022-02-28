@@ -29,9 +29,10 @@ bool Peach::hasStarPower()const
 
 void Block::getBonked(bool bonkerIsInvinciblePeach)
 {
-    world()->playSound(SOUND_PLAYER_BONK);
+    
     cerr<<m_g<<endl;
     if(m_g != 0){
+        world()->playSound(SOUND_POWERUP_APPEARS);
         if(m_g == flower)
         {
             Flower* flow = new Flower(world(), getX(), getY() +SPRITE_HEIGHT);
@@ -50,6 +51,8 @@ void Block::getBonked(bool bonkerIsInvinciblePeach)
             world()->addActor(mushy);
             m_g = none;
         }
+    }else{
+        world()->playSound(SOUND_PLAYER_BONK);
     }
     return;
 }
