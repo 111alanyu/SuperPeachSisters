@@ -40,7 +40,6 @@ bool StudentWorld::moveOrBonk(Actor *a, int destx, int desty) const
     if(moveIfPossible(a, destx, desty)){
         return true;
     }else{
-        cerr<<"FIND"<<endl;
         findBonkable(a, destx, desty);
         return false;
     }
@@ -108,26 +107,7 @@ bool StudentWorld::isMovePossible(Actor *a, int destx, int desty) const
 
         int x2_Extend = x2 + SPRITE_WIDTH - 1;
         int y2_Extend = y2 + SPRITE_HEIGHT - 1;
-        
-        /* DEBUG TOOLS*/
-        /*
-        cerr<<x1<<endl;
-        cerr<<y1<<endl;
-        cerr<<x1_Extend<<endl;
-        cerr<<y1_Extend<<endl;
-        
-        cerr<<endl;
-        
-        cerr<<x2<<endl;
-        cerr<<y2<<endl;
-        cerr<<x2_Extend<<endl;
-        cerr<<y2_Extend<<endl;
-        
-        cerr<<endl;
-        cerr<<"------------------------"<<endl;
-        cerr<<endl;
-        
-         */
+    
         if(m_Actors[i] ->blocksMovement()){
             if((x2 <= x1 && x1 <= x2_Extend) || (x2 <= x1_Extend && x1_Extend <= x2_Extend)){
                 if((y2 <= y1 && y1 <= y2_Extend) || (y2 <= y1_Extend && y1_Extend <= y2_Extend)){
@@ -177,25 +157,7 @@ bool StudentWorld::overlapsPeach(Actor *a) const
     int x2_Extend = x2 + SPRITE_WIDTH - 1;
     int y2_Extend = y2 + SPRITE_HEIGHT - 1;
     
-    /* DEBUG TOOLS*/
-    /*
-    cerr<<x1<<endl;
-    cerr<<y1<<endl;
-    cerr<<x1_Extend<<endl;
-    cerr<<y1_Extend<<endl;
-    
-    cerr<<endl;
-    
-    cerr<<x2<<endl;
-    cerr<<y2<<endl;
-    cerr<<x2_Extend<<endl;
-    cerr<<y2_Extend<<endl;
-    
-    cerr<<endl;
-    cerr<<"------------------------"<<endl;
-    cerr<<endl;
-    
-     */
+
     
     if((x2 <= x1 && x1 <= x2_Extend) || (x2 <= x1_Extend && x1_Extend <= x2_Extend)){
         if((y2 <= y1 && y1 <= y2_Extend) || (y2 <= y1_Extend && y1_Extend <= y2_Extend)){
@@ -276,6 +238,7 @@ int StudentWorld::move()
 
 void StudentWorld::cleanUp()
 {
+    
     vector<Actor*>::iterator it;
     it = m_Actors.begin();
     for(; it != m_Actors.end(); it++)
@@ -310,7 +273,6 @@ bool StudentWorld::damageOverlappingActor(Actor *damager)const
             if((x2 <= x1 && x1 <= x2_Extend) || (x2 <= x1_Extend && x1_Extend <= x2_Extend)){
                 if((y2 <= y1 && y1 <= y2_Extend) || (y2 <= y1_Extend && y1_Extend <= y2_Extend)){
                     if(!m_Actors[i]->isDead() && m_Actors[i]->sufferDamageIfDamageable()){
-                        cerr<<"SDID"<<endl;
                         return true;
                     }
                 }
@@ -339,19 +301,13 @@ void StudentWorld::load()
     l << before <<setw(2)<< setfill('0')<<getLevel()<<after;
     
     string done = l.str();
-    cerr<<done<<endl;
     Level lev(assetPath());
     string level_file = done;
     
     Level::LoadResult result = lev.loadLevel(level_file);
-    if (result == Level::load_fail_file_not_found)
-        cerr << "Could not find level01.txt data file" << endl;
     
-    else if (result == Level::load_fail_bad_format)
-        cerr << "level01.txt is improperly formatted" << endl;
-    else if (result == Level::load_success)
+    if (result == Level::load_success)
     {
-        cerr << "Successfully loaded level" << endl;
         Level::GridEntry ge;
         
         for(int i = 0; i < VIEW_HEIGHT/8; i++)
@@ -359,7 +315,7 @@ void StudentWorld::load()
             for(int j = 0; j < VIEW_WIDTH/8; j++)
             {
                 ge = lev.getContentsOf(i, j);
-                cout<<i << " "<<j <<endl;
+                
                 switch(ge){
                     case Level::empty:
                         //does nothing
@@ -450,18 +406,3 @@ void StudentWorld::endLevel(bool isGameWon)
     }
 }
 
-bool StudentWorld::getPeachTargetingInfo(Actor* a, int yDeltaLimit, int& xDeltaFromActor) const
-{
-    int tempAY = a->getY();
-    int peachY = getPeach() -> getY();
-    
-    int dif = abs(tempAY - peachY);
-    
-    if(dif > yDeltaLimit)
-    {
-        return false;
-    }
-    
-    xDeltaFromActor = getPeach()->getX() - a->getX();
-    return true;
-}

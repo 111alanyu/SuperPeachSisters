@@ -66,25 +66,20 @@ public:
     bool damageOverlappingActor(Actor* damager) const;
 
       // Return true if a overlaps Peach; otherwise, return false.
-    bool overlapsPeach(Actor* a) const; //DONE
+    bool overlapsPeach(Actor* a) const;
 
-      // If the y cooodinates of a and Peach are at least yDeltaLimit apart,
-      // return false; otherwise, set xDeltaFromActor to the difference
-      // between Peach's and a's x coordinates (positive means Peach is to
-      // the right of a) and return true.
-    bool getPeachTargetingInfo(Actor* a, int yDeltaLimit, int& xDeltaFromActor) const;
 
       // Set Peach's hit points to hp.
     void setPeachHP(int hp) const; //done
 
       // Grant Peach invincibility for this number of ticks.
-    void grantInvincibility(int ticks) const; //done
+    void grantInvincibility(int ticks) const;
 
       // Grant Peach Shoot Power.
-    void grantShootPower() const; //done
+    void grantShootPower() const;
 
       // Grant Peach Jump Power.
-    void grantJumpPower() const; //done
+    void grantJumpPower() const;
     
     Peach* getPeach() const;
     
