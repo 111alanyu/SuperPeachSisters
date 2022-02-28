@@ -29,6 +29,7 @@ bool Peach::hasStarPower()const
 
 void Block::getBonked(bool bonkerIsInvinciblePeach)
 {
+    world()->playSound(SOUND_PLAYER_BONK);
     cerr<<m_g<<endl;
     if(m_g != 0){
         if(m_g == flower)
@@ -248,15 +249,26 @@ void Peach::setHP(int hp)
 
 void Peach::getBonked(bool a){
     
-    if(a){
+    if(!a)
+    {
+        cerr<<"Alpha1"<<endl;
+        if(world()->getPeach()->hasShootPower() || world()->getPeach()->hasJumpPower())
+        {
+            world()->playSound(SOUND_PLAYER_HURT);
+            world()->getPeach()->removePowers();
+            world()->getPeach()->setTempInvis(10); //TODO: REMOVE 100 to 10
+        }
+    }
+    
+    if(world()->getPeach()->isInvincible())
+    {
+        cerr<<"RETURNDADDY"<<endl;
         return;
     }
-    int temp = getHP() - 1;
-    setHP(temp);
-
-    m_hasShoot = false;
-    m_hasJump = false;
-    world()->playSound(SOUND_PLAYER_HURT);
+    
+    
+    world()->playSound(SOUND_PLAYER_DIE);
+    setHP(getHP() - 1);
     
     if(getHP() == 0)
     {
@@ -316,19 +328,14 @@ void Enemy::doSomethingAux()
         cerr<<"UWU DADDY"<<endl;
         if(world()->getPeach()->hasStarPower())
         {
+            world()->playSound(SOUND_PLAYER_KICK);
             cerr<<"MOMMY"<<endl;
             this->setDead();
+            
             return;
         }
-        if(!world()->getPeach()->isInvincible())
-        {
-            if(world()->getPeach()->hasShootPower() || world()->getPeach()->hasJumpPower())
-            {
-                world()->getPeach()->removePowers();
-                world()->getPeach()->setTempInvis(10); //TODO: REMOVE 100 to 10
-            }
-        }
-        world()->getPeach()->getBonked(world()->getPeach()->isInvincible() || world()->getPeach()->isInvincible());
+        
+        world()->getPeach()->getBonked(world()->getPeach()->isInvincible());
         return;
     }
     
@@ -417,15 +424,7 @@ void Piranha::doSomethingAux()
             this->setDead();
             return;
         }
-        if(!world()->getPeach()->isInvincible())
-        {
-            if(world()->getPeach()->hasShootPower() || world()->getPeach()->hasJumpPower())
-            {
-                world()->getPeach()->removePowers();
-                world()->getPeach()->setTempInvis(10);
-            }
-        }
-        world()->getPeach()->getBonked(world()->getPeach()->isInvincible() || world()->getPeach()->isInvincible());
+        world()->getPeach()->getBonked(world()->getPeach()->isInvincible());
         return;
     }
     
@@ -462,6 +461,7 @@ void Piranha::doSomethingAux()
     {
         PiranhaFireball* pf = new PiranhaFireball(world(), getX(), getY(), getDirection());
         world()->addActor(pf);
+        world()->playSound(SOUND_PIRANHA_FIRE);
         m_fireDelay = 40;
     }
 
@@ -477,20 +477,25 @@ PiranhaFireball::PiranhaFireball(StudentWorld* w, int x, int y, int dir)
 
 void PiranhaFireball::doSomethingAux()
 {
+    if(isDead())
+    {
+        return;
+    }
+    
     if(world()->overlapsPeach(this))
     {
-        if(!world()->getPeach()->isInvincible())
+        cerr<<"UWU DADDY"<<endl;
+        if(world()->getPeach()->hasStarPower())
         {
-            if(world()->getPeach()->hasShootPower() || world()->getPeach()->hasJumpPower())
-            {
-                world()->getPeach()->removePowers();
-                world()->getPeach()->setTempInvis(10);
-            }
+            world()->playSound(SOUND_PLAYER_KICK);
+            cerr<<"MOMMY"<<endl;
+            this->setDead();
+            
+            return;
         }
-        world()->getPeach()->getBonked(world()->getPeach()->isInvincible() || world()->getPeach()->isInvincible());
         
-        world()->bonkOverlappingActor(this);
-        this->setDead();
+        setDead();
+        world()->getPeach()->getBonked(world()->getPeach()->isInvincible());
         return;
     }
     
@@ -569,7 +574,7 @@ void Peach::doSomethingAux()
                     
                     if(!world()->isMovePossible(this, getX(), getY()-1))
                     {
-                        
+                        world()->playSound(SOUND_PLAYER_JUMP);
                         if(hasJumpPower())
                         {
                             m_jumpDist = 12;
@@ -584,8 +589,8 @@ void Peach::doSomethingAux()
                 {
                     if(hasShootPower() && m_timeToNext == 0)
                     {
+                        world()->playSound(SOUND_PLAYER_FIRE);
                         m_timeToNext = 8;
-                        
                         PeachFireball* pf = new PeachFireball(world(), getX(), getY(), getDirection());
                         world()->addActor(pf);
                     }
@@ -626,6 +631,7 @@ Goodie::Goodie(StudentWorld* w, int imageID, int x, int y)
 void Goodie::doSomethingAux()
 {
     if(world()->overlapsPeach(this)){
+        world()->playSound(SOUND_PLAYER_POWERUP);
         gainPower();
         setDead();
     }else{

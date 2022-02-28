@@ -234,13 +234,12 @@ void StudentWorld::displayText()
 
 int StudentWorld::move()
 {
-    // This code is here merely to allow the game to build, run, and terminate after you hit enter.
-    // Notice that the return value GWSTATUS_PLAYER_DIED will cause our framework to end the current level.
     displayText();
     
     if(m_peach -> isDead())
     {
         playSound(SOUND_PLAYER_DIE);
+        decLives();
         return GWSTATUS_PLAYER_DIED;
     }
     for(int i = 0; i < m_Actors.size(); i++){
@@ -420,6 +419,7 @@ void StudentWorld::load()
                         m_Actors.push_back(newMar);
                         break;
                     }
+                        
                     default:
                         break;
                         
