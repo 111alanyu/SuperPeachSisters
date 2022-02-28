@@ -645,11 +645,13 @@ void Goodie::doSomethingAux()
 
 void Flower::gainPower()
 {
+    world()->increaseScore(50);
     world()->getPeach()->gainShootPower();
 }
 
 void Mushroom::gainPower()
 {
+    world()->increaseScore(75);
     world()->getPeach()->gainJumpPower();
 }
 
@@ -660,6 +662,7 @@ void Peach::gainStarPower()
 
 void Star::gainPower()
 {
+    world()->increaseScore(100);
     world()->getPeach()->gainStarPower();
     world()->getPeach()->gainInvincibility(150);
 }
