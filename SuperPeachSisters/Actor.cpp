@@ -293,15 +293,23 @@ void Enemy::doSomethingAux()
     
     if(world()->overlapsPeach(this))
     {
+        cerr<<"UWU DADDY"<<endl;
+        if(world()->getPeach()->hasStarPower())
+        {
+            cerr<<"MOMMY"<<endl;
+            this->setDead();
+            return;
+        }
         if(!world()->getPeach()->isInvincible())
         {
             if(world()->getPeach()->hasShootPower() || world()->getPeach()->hasJumpPower())
             {
                 world()->getPeach()->removePowers();
-                world()->getPeach()->setTempInvis(10);
+                world()->getPeach()->setTempInvis(10); //TODO: REMOVE 100 to 10
             }
         }
         world()->getPeach()->getBonked(world()->getPeach()->isInvincible() || world()->getPeach()->isInvincible());
+        return;
     }
     
     if(getDirection() == 0){
@@ -375,7 +383,23 @@ void Piranha::doSomethingAux()
     
     if(world()->overlapsPeach(this))
     {
-        world()->getPeach()->getBonked(world()->getPeach()->isInvincible());
+        cerr<<"UWU DADDY"<<endl;
+        if(world()->getPeach()->hasStarPower())
+        {
+            cerr<<"MOMMY"<<endl;
+            this->setDead();
+            return;
+        }
+        if(!world()->getPeach()->isInvincible())
+        {
+            if(world()->getPeach()->hasShootPower() || world()->getPeach()->hasJumpPower())
+            {
+                world()->getPeach()->removePowers();
+                world()->getPeach()->setTempInvis(10);
+            }
+        }
+        world()->getPeach()->getBonked(world()->getPeach()->isInvincible() || world()->getPeach()->isInvincible());
+        return;
     }
     
     int y = this->getY();
@@ -433,7 +457,7 @@ void PiranhaFireball::doSomethingAux()
             if(world()->getPeach()->hasShootPower() || world()->getPeach()->hasJumpPower())
             {
                 world()->getPeach()->removePowers();
-                world()->getPeach()->setTempInvis(10);
+                world()->getPeach()->setTempInvis(10); 
             }
         }
         world()->getPeach()->getBonked(world()->getPeach()->isInvincible() || world()->getPeach()->isInvincible());
