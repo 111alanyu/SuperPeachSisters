@@ -238,7 +238,6 @@ int StudentWorld::move()
 
 void StudentWorld::cleanUp()
 {
-    
     vector<Actor*>::iterator it;
     it = m_Actors.begin();
     for(; it != m_Actors.end(); it++)

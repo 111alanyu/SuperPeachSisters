@@ -91,9 +91,8 @@ public:
     void removePowers();
 
     bool hasStarPower() const;
-    
+
     void setTempInvis(int num);
-    
     
 private:
     virtual void doSomethingAux();
